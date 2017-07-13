@@ -64,6 +64,3 @@ Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
-
-# Skrymt Specific
-Plugins/SkrymtArtReview
