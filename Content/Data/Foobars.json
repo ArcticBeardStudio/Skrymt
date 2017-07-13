@@ -1,0 +1,12 @@
+[
+	{
+		"Name": "Hej",
+		"Foo": "bar",
+		"Foos":
+		{
+			"Bar1": true,
+			"Bar2": false,
+			"Bar3": true
+		}
+	}
+]

@@ -1,0 +1,21 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#include "EventManager.h"
+#include "EventDecider.h"
+
+TSet<FName> UEventManager::GetNextWeatherFromDecider()
+{
+	EventDecider = NewObject<UEventDecider>(GetOuter());
+	FName NewWeather = EventDecider->GetNextWeather();
+
+	UE_LOG(LogTemp, Warning, TEXT("Next weather is: '%s'"), *NewWeather.ToString());
+
+	UDataTable* DataTable = LoadObject<UDataTable>(NULL, TEXT("/Game/Data/Events/WeatherEventData.WeatherEventData"), NULL, NULL, NULL);
+
+	FString ContextString;
+	FWeatherEventData* NewWeatherData = DataTable->FindRow<FWeatherEventData>(NewWeather, ContextString);
+
+	return NewWeatherData->ReceivedTags;
+}
+
+
