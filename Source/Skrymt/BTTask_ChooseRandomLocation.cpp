@@ -28,13 +28,6 @@ EBTNodeResult::Type UBTTask_ChooseRandomLocationC::ExecuteTask(class UBehaviorTr
 
 
 
-
-
-
-
-
-
-
 	//Get controller of the owner component
 	AAIController* AICon = Cast<AAIController>(OwnerComp.GetAIOwner());
 
