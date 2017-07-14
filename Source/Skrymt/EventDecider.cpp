@@ -2,7 +2,7 @@
 #pragma once
 
 #include "EventDecider.h"
-#include "SkrymtGameModeBase.h"
+#include "SkrymtPlayerState.h"
 #include "UnrealMathUtility.h"
 
 FTableRowBase* UEventDecider::GetEventDeciderData(FName Name, const TCHAR* Path)
@@ -12,7 +12,7 @@ FTableRowBase* UEventDecider::GetEventDeciderData(FName Name, const TCHAR* Path)
 	return DataTable->FindRow<FTableRowBase>(Name, ContextString);
 }
 
-UDataTable* UEventDecider::GetEventDeciders(const TCHAR* Path)
+UDataTable* UEventDecider::GetEventDeciders(const TCHAR* Path) 
 {
 	UDataTable* DataTable = LoadObject<UDataTable>(NULL, Path, NULL, NULL, NULL);
 	return DataTable;
@@ -35,8 +35,9 @@ void UEventDecider::CalculateEventDecidersWeigths(UDataTable* EventDeciderTable)
 			for (auto& ChanceTag : row->ChanceTags)
 			{
 				//UE_LOG(LogTemp, Warning, TEXT("Name of tags that give weight to weather: '%s'"), *ChanceTag.Key.ToString());
-				ASkrymtGameModeBase* gamemode = GetTypedOuter<ASkrymtGameModeBase>();
-				if (gamemode->GetWeatherTags().Contains(ChanceTag.Key))
+				//ASkrymtGameModeBase* gamemode = GetTypedOuter<ASkrymtGameModeBase>();
+				ASkrymtPlayerState* PlayerState = Cast<ASkrymtPlayerState>(GetWorld()->GetGameState());
+				if (PlayerState->GetWeatherTags().Contains(ChanceTag.Key))
 				{
 					TotalEventWeight = TotalEventWeight + ChanceTag.Value;
 				}
