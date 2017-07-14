@@ -8,7 +8,7 @@ TSet<FName> UEventManager::GetNextWeatherFromDecider()
 	EventDecider = NewObject<UEventDecider>(GetOuter());
 	FName NewWeather = EventDecider->GetNextWeather();
 
-	UE_LOG(LogTemp, Warning, TEXT("Next weather is: '%s'"), *NewWeather.ToString());
+	GEngine->AddOnScreenDebugMessage(10, 10.f, FColor::Emerald, FString::Printf(TEXT("Next weather is: '%s'"), *NewWeather.ToString()));
 
 	UDataTable* DataTable = LoadObject<UDataTable>(NULL, TEXT("/Game/Data/Events/WeatherEventData.WeatherEventData"), NULL, NULL, NULL);
 
