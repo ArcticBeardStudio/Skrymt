@@ -15,23 +15,30 @@ void AAIVillagerController::OnPerceptionUpdated(TArray<AActor*> UpdatedActors)
 {
 	//If our character exists inside the UpdatedActors array, register him
 	//to our blackboard component
+	FName Enemy = FName("Enemy");
 
 	for (AActor* Actor : UpdatedActors)
 	{
-
-		//Check if correct-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-		if (Actor->IsA<AControlableCharacter>() && !GetSeeingPawn())
-		{
-			BlackboardComp->SetValueAsObject(BlackboardEnemyKey, Actor);
-			BlackboardComp->SetValueAsBool(Fleeing, true);
-			return;
-		}
+		/*for (FName Enemy : Enemyclassnames)
+		Actor->IsA<AControlableCharacter>()
+		{*/
+			//Check if correct-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+			if (Actor->ActorHasTag(Enemy) && !GetSeeingPawn())
+			{
+				//Actor->ActorHasTag(Enemy);
+				BlackboardComp->SetValueAsObject(BlackboardEnemyKey, Actor);
+				BlackboardComp->SetValueAsBool(Fleeing, true);
+				return;
+			}
+		//}
 	}
 	//UE_LOG(LogTemp, Log, TEXT("Hello world!"));
 	//The character doesn't exist in our updated actors - so make sure
 	//to delete any previous reference of him from the blackboard
 	BlackboardComp->SetValueAsObject(BlackboardEnemyKey, nullptr);
 }
+
+
 
 AAIVillagerController::AAIVillagerController()
 {
@@ -50,7 +57,7 @@ AAIVillagerController::AAIVillagerController()
 	Sight->SightRadius = 2000.f;
 	Sight->LoseSightRadius = 2100.f;
 	Sight->PeripheralVisionAngleDegrees = 120.f;
-	//Sight->SetMaxAge(6.f);
+	//Sight->SetMaxAge(15.f);
 
 	//Tell the sight sense to detect everything
 	Sight->DetectionByAffiliation.bDetectEnemies = true;
