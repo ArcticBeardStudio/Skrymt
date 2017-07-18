@@ -35,9 +35,9 @@ void UEventDecider::CalculateEventDecidersWeigths(UDataTable* EventDeciderTable)
 			for (auto& ChanceTag : row->ChanceTags)
 			{
 				//UE_LOG(LogTemp, Warning, TEXT("Name of tags that give weight to weather: '%s'"), *ChanceTag.Key.ToString());
-				//ASkrymtGameModeBase* gamemode = GetTypedOuter<ASkrymtGameModeBase>();
-				ASkrymtPlayerState* PlayerState = Cast<ASkrymtPlayerState>(GetWorld()->GetGameState());
-				if (PlayerState->GetWeatherTags().Contains(ChanceTag.Key))
+				ASkrymtPlayerState* PlayerState = GetTypedOuter<ASkrymtPlayerState>();
+				//ASkrymtPlayerState* PlayerState = (ASkrymtPlayerState*)(GetWorld()->GetFirstPlayerController()->PlayerState);
+				if (PlayerState->WeatherTags.Contains(FName(ChanceTag.Key)))
 				{
 					TotalEventWeight = TotalEventWeight + ChanceTag.Value;
 				}
