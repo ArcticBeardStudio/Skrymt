@@ -7,7 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "Building.generated.h"
 
-
+//BluePrintTable For information for buildings 
 USTRUCT(Blueprintable)
 struct FBuildingData : public FTableRowBase
 {
@@ -36,15 +36,15 @@ class SKRYMT_API ABuilding : public AActor
 	GENERATED_BODY()
 
 public:
-
+	// Mesh component
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
 
-		UStaticMeshComponent * tempmesh;
-
+		UStaticMeshComponent * Tempmesh;
+	//constructor and initializer
 	ABuilding(const FObjectInitializer& ObjectInitializer)
 		: Super(ObjectInitializer)
 	{
-		tempmesh = ObjectInitializer.CreateDefaultSubobject<UStaticMeshComponent>(this, TEXT("Mesh"));
+		Tempmesh = ObjectInitializer.CreateDefaultSubobject<UStaticMeshComponent>(this, TEXT("Mesh"));
 
 	}
 
@@ -54,29 +54,36 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	//UStaticMesh CurrentMesh;
+
+	//Health Variable
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
-		uint8 health;
+		uint8 Health;
+	//Armor Variable
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
 		uint8 Armor;
+	//Housing Variable
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
 		uint8 Housing;
+	//Garrison Variable
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
 		uint8 Garrison;
 public:
 
 
-	/*SM_asset for mesh*/
-
+	
+	//Function to handle construction of the Building
 	UFUNCTION(BlueprintCallable)
 		virtual void Construction(uint8 modifier);
+	//Function to handle Production of the Building
 	UFUNCTION(BlueprintCallable)
 		virtual void Produce(uint8 modifier);
+	//Function to handle Repairs of the Building
 	UFUNCTION(BlueprintCallable)
-		virtual void repair(uint8 modifier);
+		virtual void Repair(uint8 modifier);
+	//Function to change mesh of the Building
 	UFUNCTION(BlueprintCallable)
 		void MeshChange(FString filepath);
-	// Called every frame
-	//virtual void Tick(float DeltaTime) override;
+	
 
 
 
