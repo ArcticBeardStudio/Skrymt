@@ -27,23 +27,23 @@ public:
 	// Base data getter function
 	static FTableRowBase* GetData(FName Name, const TCHAR* Path);
 
-	// Gets the data associated to the ability with the given name
+	// Gets the data associated to the Ability with the given name
 	UFUNCTION(BlueprintCallable, Category = "Data Reader")
 	static FAbilityData GetAbilityData(FName AbilityName)
 	{
 		return *static_cast<FAbilityData*>(GetData(AbilityName, ABILITY_PATH));
 	};
 
-	// Gets the data associated to the effect with the given name
+	// Gets the data associated to the Effect with the given name
 	UFUNCTION(BlueprintCallable, Category = "Data Reader")
 	static FEffectData GetEffectData(FName EffectName)
 	{
 		return *static_cast<FEffectData*>(GetData(EffectName, EFFECT_PATH));
 	};
-
+	// Gets the data associated to the Action with the given name
 	UFUNCTION(BlueprintCallable, Category = "DataReader")
 	static FActionData GetActionData(FName RowName);
-
+	// Gets the data associated to the ApllyEffect with the given name
 	UFUNCTION(BlueprintCallable, Category = "DataReader")
 	static FApplyEffectData GetApplyEffectData(FName RowName);
 
