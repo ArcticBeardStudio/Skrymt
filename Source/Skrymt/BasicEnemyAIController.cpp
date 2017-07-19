@@ -22,7 +22,7 @@ void ABasicEnemyAIController::OnPerceptionUpdated(TArray<AActor*> UpdatedActors)
 		/*for (FName Enemy : Enemyclassnames)
 		Actor->IsA<AControlableCharacter>()
 		{*/
-		//Check if correct-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		//Check if actor has enemy tag 
 		if (Actor->ActorHasTag(Enemy) && !GetSeeingPawn())
 		{
 			//Actor->ActorHasTag(Enemy);
@@ -46,7 +46,6 @@ ABasicEnemyAIController::ABasicEnemyAIController()
 	BehaviorTreeComp = CreateDefaultSubobject<UBehaviorTreeComponent>(FName("BehaviorComp"));
 
 	BlackboardComp = CreateDefaultSubobject<UBlackboardComponent>(FName("BlackboardComp"));
-
 
 
 	AIPerceptionComponent = CreateDefaultSubobject<UAIPerceptionComponent>(FName("PerceptionComp"));

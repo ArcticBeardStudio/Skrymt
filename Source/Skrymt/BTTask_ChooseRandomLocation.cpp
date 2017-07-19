@@ -16,17 +16,6 @@ EBTNodeResult::Type UBTTask_ChooseRandomLocationC::ExecuteTask(class UBehaviorTr
 {
 
 
-	//for (TActorIterator<ANavigationData> ActorItr(GetWorld()); ActorItr; ++ActorItr)
-	//{
-	//	// Same as with the Object Iterator, access the subclass instance with the * or -> operators.
-	//	ANavigationData *Data = *ActorItr;
-	//	Data->ActorHasTag()
-	//	ClientMessage(ActorItr->GetName());
-	//	ClientMessage(ActorItr->GetActorLocation().ToString());
-	//}
-
-
-
 
 	//Get controller of the owner component
 	AAIController* AICon = Cast<AAIController>(OwnerComp.GetAIOwner());
@@ -45,23 +34,23 @@ EBTNodeResult::Type UBTTask_ChooseRandomLocationC::ExecuteTask(class UBehaviorTr
 
 	//If both valid get the blackboard component of the pawn
 	AActor* Pawn = nullptr;
-	FVector actorlocation;
+	FVector Actorlocation;
 	FVector NewLocation;
-	FName key = FName("MoveToLocation");
+	FName Key = FName("MoveToLocation");
 	UBlackboardComponent* BlackboardComp = nullptr;
 	if (AICon && (AICon->GetPawn()))
 	{
 		Pawn = AICon->GetPawn();
-		actorlocation = Pawn->GetActorLocation();
+		Actorlocation = Pawn->GetActorLocation();
 		UNavigationSystem* NavSys = UNavigationSystem::GetCurrent(Pawn);
-		NewLocation =  NavSys->GetRandomReachablePointInRadius(Pawn->GetWorld(),actorlocation, 2000.f);
+		NewLocation =  NavSys->GetRandomReachablePointInRadius(Pawn->GetWorld(),Actorlocation, 2000.f);
 		BlackboardComp = UAIBlueprintHelperLibrary::GetBlackboard(Pawn);
 	}
 
 	//If the blackboard component is valid print out a text
 	if (BlackboardComp)
 	{
-		BlackboardComp->SetValueAsVector(key, NewLocation);
+		BlackboardComp->SetValueAsVector(Key, NewLocation);
 		//UE_LOG(LogTemp, Warning, TEXT("BlackBoardComponent successfully found!"));
 		return EBTNodeResult::Succeeded;
 	}
