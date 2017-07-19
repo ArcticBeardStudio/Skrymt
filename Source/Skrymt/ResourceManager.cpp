@@ -9,11 +9,11 @@ void UResourceManager::EndOfDay()
 
 void UResourceManager::CalculateTodaysResources(TArray<int32> TodaysProduction) // iFarmingPopulation, iGatheringPopulation, iHuntingPopulation, iWoodPopulation, iStonePopulation, iMiningPopulation, iMiningPopulation 
 {
-	iFoodResource = fFarmingBaseProduction * TodaysProduction[0] + fGatheringBaseProduction * TodaysProduction[1] + fHuntingBaseProduction * TodaysProduction[2];
-	iWoodResource = fForestryBaseProduction * TodaysProduction[3];
-	iStoneResource = fQuarryingBaseProduction * TodaysProduction[4];
-	iOreResource = fMiningOreBaseProduction * TodaysProduction[5];
-	iGoldResource = fMiningGoldBaseProduction * TodaysProduction[6];
+	FoodResource = FarmingBaseProduction * TodaysProduction[0] + GatheringBaseProduction * TodaysProduction[1] + HuntingBaseProduction * TodaysProduction[2];
+	WoodResource = ForestryBaseProduction * TodaysProduction[3];
+	StoneResource = QuarryingBaseProduction * TodaysProduction[4];
+	OreResource = MiningOreBaseProduction * TodaysProduction[5];
+	GoldResource = MiningGoldBaseProduction * TodaysProduction[6];
 }
 
 TArray<int32> UResourceManager::GetTodaysResources()
