@@ -2,9 +2,6 @@
 
 #include "ResourceManager.h"
 
-
-
-
 void UResourceManager::EndOfDay()
 {
 
@@ -27,4 +24,29 @@ TArray<int32> UResourceManager::GetTodaysResources()
 void UResourceManager::SetTodaysResources()
 {
 	TodaysResources = { iFoodResource, iWoodResource, iStoneResource, iOreResource, iGoldResource };
+}
+
+int UResourceManager::GetFoodResource()
+{
+	return iFoodResource;
+}
+
+int UResourceManager::GetWoodResource()
+{
+	return iWoodResource;
+}
+
+int UResourceManager::GetStoneResource()
+{
+	return iStoneResource;
+}
+
+int UResourceManager::GetOreResource()
+{
+	return iOreResource;
+}
+
+int UResourceManager::GetGoldResource()
+{
+	return iGoldResource;
 }

@@ -1,6 +1,13 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "DayNightCycleGameState.h"
+#include "SkrymtPlayerState.h"
+
+void ASkrymtPlayerState::BeginPlay()
+{
+	Super::BeginPlay();
+
+}
 
 void ADayNightCycleGameState::StartDay()
 {
@@ -10,6 +17,7 @@ void ADayNightCycleGameState::StartDay()
 //** Call this when "End day" button is pressed in the HUD. Determines whether we go to the next day or wave *//
 bool ADayNightCycleGameState::EndDay()
 {
+	
 	return true;
 	/*if(bGoToNextDay)
 	{

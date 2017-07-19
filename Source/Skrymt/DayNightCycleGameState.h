@@ -16,6 +16,8 @@ class SKRYMT_API ADayNightCycleGameState : public AGameStateBase
 	
 public:
 
+	virtual void BeginPlay() override;
+
 	UFUNCTION(BlueprintCallable, Category = "DayNightCycleStartDay")
 	void StartDay();
 
@@ -43,5 +45,6 @@ protected:
 
 private:
 	
+
 	
 };
