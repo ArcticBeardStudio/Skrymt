@@ -6,6 +6,7 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "BreakfastReportBPLibrary.generated.h"
 
+
 /**
  * 
  */
@@ -13,7 +14,6 @@ UCLASS()
 class SKRYMT_API UBreakfastReportBPLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
-
 
 		//** Functions to get the current production *//
 		UFUNCTION(BlueprintPure, Category = "BreakfastReport")

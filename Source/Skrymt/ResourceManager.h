@@ -40,6 +40,17 @@ protected:
 
 public:
 	
+	//** Get functions for all resources **//
+	UFUNCTION(BlueprintPure, Category = "ResourceManager")
+		int GetFoodResource();
+	UFUNCTION(BlueprintPure, Category = "ResourceManager")
+		int GetWoodResource();
+	UFUNCTION(BlueprintPure, Category = "ResourceManager")
+		int GetStoneResource();
+	UFUNCTION(BlueprintPure, Category = "ResourceManager")
+		int GetOreResource();
+	UFUNCTION(BlueprintPure, Category = "ResourceManager")
+		int GetGoldResource();
 
 	/** Function called at the end of the day */
 	UFUNCTION(BlueprintCallable, Category = "ResourceManager")
