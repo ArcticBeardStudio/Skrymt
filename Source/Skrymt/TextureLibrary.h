@@ -17,5 +17,5 @@ class SKRYMT_API UTextureLibrary : public UBlueprintFunctionLibrary
 public:
 	// Gets the color value of a textures pixel
 	UFUNCTION(BlueprintCallable, Category = "Texture")
-	FColor GetTexturePixel(UTexture2D *Texture, int32 X, int32 Y);
+	FColor GetTexturePixel(UTexture2D* Texture, int32 X, int32 Y);
 };
