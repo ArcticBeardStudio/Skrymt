@@ -4,7 +4,7 @@
 
 FTableRowBase* UDataReader::GetData(FName Name, const TCHAR* Path)
 {
-	UDataTable* DataTable = LoadObject<UDataTable>(NULL, Path, NULL, NULL, NULL);
+	UDataTable* DataTable = LoadObject<UDataTable>(NULL, Path, NULL, LOAD_None, NULL);
 	FString ContextString;
 	return DataTable->FindRow<FTableRowBase>(Name, ContextString);
 }

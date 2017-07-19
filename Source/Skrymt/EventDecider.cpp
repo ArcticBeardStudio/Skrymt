@@ -1,5 +1,4 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-#pragma once
 
 #include "EventDecider.h"
 #include "SkrymtPlayerState.h"
@@ -7,14 +6,14 @@
 
 FTableRowBase* UEventDecider::GetEventDeciderData(FName Name, const TCHAR* Path)
 {
-	UDataTable* DataTable = LoadObject<UDataTable>(NULL, Path, NULL, NULL, NULL);
+	UDataTable* DataTable = LoadObject<UDataTable>(NULL, Path, NULL, LOAD_None, NULL);
 	FString ContextString;
 	return DataTable->FindRow<FTableRowBase>(Name, ContextString);
 }
 
 UDataTable* UEventDecider::GetEventDeciders(const TCHAR* Path) 
 {
-	UDataTable* DataTable = LoadObject<UDataTable>(NULL, Path, NULL, NULL, NULL);
+	UDataTable* DataTable = LoadObject<UDataTable>(NULL, Path, NULL, LOAD_None, NULL);
 	return DataTable;
 }
 
