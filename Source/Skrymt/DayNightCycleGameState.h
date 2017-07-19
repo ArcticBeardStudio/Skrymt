@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
+#include "Engine.h"
 #include "GameFramework/GameStateBase.h"
 #include "DayNightCycleGameState.generated.h"
 
@@ -44,7 +44,5 @@ protected:
 	int Wave;
 
 private:
-	
-
 	
 };

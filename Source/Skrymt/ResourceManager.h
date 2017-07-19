@@ -40,7 +40,7 @@ protected:
 
 public:
 	
-
+	//** Get functions for all resources **//
 	UFUNCTION(BlueprintPure, Category = "ResourceManager")
 		int GetFoodResource();
 	UFUNCTION(BlueprintPure, Category = "ResourceManager")
