@@ -1,17 +1,17 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "AIVillagerController.h"
+#include "BasicEnemyAIController.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"
 #include "BehaviorTree/BehaviorTree.h"
-#include "VillagerCharacter.h"
-#include "ControlableCharacter.h"
-#include  "Barrack.h"
+//#include "VillagerCharacter.h"
+//#include "ControlableCharacter.h"
+//#include  "Barrack.h"
 #include <vector>
 
 
 
-void AAIVillagerController::OnPerceptionUpdated(TArray<AActor*> UpdatedActors)
+void ABasicEnemyAIController::OnPerceptionUpdated(TArray<AActor*> UpdatedActors)
 {
 	//If our character exists inside the UpdatedActors array, register him
 	//to our blackboard component
@@ -22,14 +22,14 @@ void AAIVillagerController::OnPerceptionUpdated(TArray<AActor*> UpdatedActors)
 		/*for (FName Enemy : Enemyclassnames)
 		Actor->IsA<AControlableCharacter>()
 		{*/
-			//Check if correct-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-			if (Actor->ActorHasTag(Enemy) && !GetSeeingPawn())
-			{
-				//Actor->ActorHasTag(Enemy);
-				BlackboardComp->SetValueAsObject(BlackboardEnemyKey, Actor);
-				BlackboardComp->SetValueAsBool(Fleeing, true);
-				return;
-			}
+		//Check if actor has enemy tag 
+		if (Actor->ActorHasTag(Enemy) && !GetSeeingPawn())
+		{
+			//Actor->ActorHasTag(Enemy);
+			BlackboardComp->SetValueAsObject(BlackboardEnemyKey, Actor);
+			BlackboardComp->SetValueAsBool(Fleeing, true);
+			return;
+		}
 		//}
 	}
 	//UE_LOG(LogTemp, Log, TEXT("Hello world!"));
@@ -40,13 +40,12 @@ void AAIVillagerController::OnPerceptionUpdated(TArray<AActor*> UpdatedActors)
 
 
 
-AAIVillagerController::AAIVillagerController()
+ABasicEnemyAIController::ABasicEnemyAIController()
 {
 	//Components Init.
 	BehaviorTreeComp = CreateDefaultSubobject<UBehaviorTreeComponent>(FName("BehaviorComp"));
 
 	BlackboardComp = CreateDefaultSubobject<UBlackboardComponent>(FName("BlackboardComp"));
-
 
 
 	AIPerceptionComponent = CreateDefaultSubobject<UAIPerceptionComponent>(FName("PerceptionComp"));
@@ -68,7 +67,7 @@ AAIVillagerController::AAIVillagerController()
 	AIPerceptionComponent->ConfigureSense(*Sight);
 }
 
-void AAIVillagerController::Possess(APawn* InPawn)
+void ABasicEnemyAIController::Possess(APawn* InPawn)
 {
 	Super::Possess(InPawn);
 
@@ -84,10 +83,10 @@ void AAIVillagerController::Possess(APawn* InPawn)
 
 
 	//Register the OnPerceptionUpdated function to fire whenever the AIPerception get's updated
-	AIPerceptionComponent->OnPerceptionUpdated.AddDynamic(this, &AAIVillagerController::OnPerceptionUpdated);
+	AIPerceptionComponent->OnPerceptionUpdated.AddDynamic(this, &ABasicEnemyAIController::OnPerceptionUpdated);
 }
 
-AActor* AAIVillagerController::GetSeeingPawn()
+AActor* ABasicEnemyAIController::GetSeeingPawn()
 {
 	//Return the seeing pawn
 	UObject* object = BlackboardComp->GetValueAsObject(BlackboardEnemyKey);

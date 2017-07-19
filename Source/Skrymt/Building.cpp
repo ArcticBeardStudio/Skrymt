@@ -12,28 +12,29 @@ void ABuilding::BeginPlay()
 
 }
 
-void ABuilding::Construction(uint8 modifier)
+void ABuilding::Construction(uint8 Modifier)
 {
 
 }
 
-void ABuilding::Produce(uint8 modifier)
+void ABuilding::Produce(uint8 Modifier)
 {
+
 }
 
-void ABuilding::repair(uint8 modifier)
+void ABuilding::Repair(uint8 Modifier)
 {
-	health += modifier;
+	Health += Modifier;
 }
 
-void ABuilding::MeshChange(FString filepath)
+void ABuilding::MeshChange(FString Filepath)
 {
-	const TCHAR* temp = *filepath;
-	UStaticMesh* meshToUse = Cast<UStaticMesh>(StaticLoadObject(UStaticMesh::StaticClass(), NULL, temp));
+	const TCHAR* Temp = *Filepath;
+	UStaticMesh* MeshToUse = Cast<UStaticMesh>(StaticLoadObject(UStaticMesh::StaticClass(), NULL, Temp));
 
-	if (meshToUse && tempmesh)
+	if (MeshToUse && Tempmesh)
 	{
-		tempmesh->SetStaticMesh(meshToUse);
+		Tempmesh->SetStaticMesh(MeshToUse);
 	}
 
 }

@@ -23,30 +23,30 @@ TArray<int32> UResourceManager::GetTodaysResources()
 
 void UResourceManager::SetTodaysResources()
 {
-	TodaysResources = { iFoodResource, iWoodResource, iStoneResource, iOreResource, iGoldResource };
+	TodaysResources = { FoodResource, WoodResource, StoneResource, OreResource, GoldResource };
 }
 
 int UResourceManager::GetFoodResource()
 {
-	return iFoodResource;
+	return FoodResource;
 }
 
 int UResourceManager::GetWoodResource()
 {
-	return iWoodResource;
+	return WoodResource;
 }
 
 int UResourceManager::GetStoneResource()
 {
-	return iStoneResource;
+	return StoneResource;
 }
 
 int UResourceManager::GetOreResource()
 {
-	return iOreResource;
+	return OreResource;
 }
 
 int UResourceManager::GetGoldResource()
 {
-	return iGoldResource;
+	return GoldResource;
 }
