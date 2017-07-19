@@ -46,7 +46,6 @@ public:
 	{
 		tempmesh = ObjectInitializer.CreateDefaultSubobject<UStaticMeshComponent>(this, TEXT("Mesh"));
 
-
 	}
 
 

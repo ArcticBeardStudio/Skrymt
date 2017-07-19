@@ -17,29 +17,40 @@ class SKRYMT_API UResourceManager : public UObject
 protected:
 	//VARIABLES
 //Variables to that hold the count for a resource
-	int iFoodResource;
-	int iWoodResource;
-	int iStoneResource;
-	int iOreResource;
-	int iGoldResource;
+	int FoodResource;
+	int WoodResource;
+	int StoneResource;
+	int OreResource;
+	int GoldResource;
 
 //The base production for each area of resource gathering
-	float fFarmingBaseProduction = 1.0f;
-	float fGatheringBaseProduction = 1.0f;
-	float fHuntingBaseProduction = 1.0f;
-	float fFishingBaseProduction = 1.0f;
+	float FarmingBaseProduction = 1.0f;
+	float GatheringBaseProduction = 1.0f;
+	float HuntingBaseProduction = 1.0f;
+	float FishingBaseProduction = 1.0f;
 	
-	float fMiningOreBaseProduction = 1.0f;
-	float fMiningGoldBaseProduction = 1.0f;
+	float MiningOreBaseProduction = 1.0f;
+	float MiningGoldBaseProduction = 1.0f;
 	
-	float fQuarryingBaseProduction = 1.0f;
+	float QuarryingBaseProduction = 1.0f;
 	
-	float fForestryBaseProduction = 1.0f;
+	float ForestryBaseProduction = 1.0f;
 
 	TArray<int32> TodaysResources;
 
 public:
 	
+	//** Get functions for all resources **//
+	UFUNCTION(BlueprintPure, Category = "ResourceManager")
+		int GetFoodResource();
+	UFUNCTION(BlueprintPure, Category = "ResourceManager")
+		int GetWoodResource();
+	UFUNCTION(BlueprintPure, Category = "ResourceManager")
+		int GetStoneResource();
+	UFUNCTION(BlueprintPure, Category = "ResourceManager")
+		int GetOreResource();
+	UFUNCTION(BlueprintPure, Category = "ResourceManager")
+		int GetGoldResource();
 
 	/** Function called at the end of the day */
 	UFUNCTION(BlueprintCallable, Category = "ResourceManager")

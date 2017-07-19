@@ -1,15 +1,29 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "DayNightCycleGameState.h"
+#include "SkrymtPlayerState.h"
+#include "ResourceManager.h"
 
+void ADayNightCycleGameState::BeginPlay()
+{
+	Super::BeginPlay();
+}
+
+//** Function called at the start of the day, updates the players resources
 void ADayNightCycleGameState::StartDay()
 {
+	ASkrymtPlayerState* PlayerState = Cast<ASkrymtPlayerState>(GetWorld()->GetFirstPlayerController()->PlayerState);
+	PlayerState->UpdateResources(PlayerState->ResourceManager->GetTodaysResources());
+
 	Day++;
 }
 
 //** Call this when "End day" button is pressed in the HUD. Determines whether we go to the next day or wave *//
 bool ADayNightCycleGameState::EndDay()
 {
+	ASkrymtPlayerState* PlayerState = Cast<ASkrymtPlayerState>(GetWorld()->GetFirstPlayerController()->PlayerState);
+	PlayerState->EndOfTheDay();
+
 	return true;
 	/*if(bGoToNextDay)
 	{

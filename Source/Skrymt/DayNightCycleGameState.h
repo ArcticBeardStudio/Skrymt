@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
+#include "Engine.h"
 #include "GameFramework/GameStateBase.h"
 #include "DayNightCycleGameState.generated.h"
 
@@ -15,6 +15,8 @@ class SKRYMT_API ADayNightCycleGameState : public AGameStateBase
 	GENERATED_BODY()
 	
 public:
+
+	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintCallable, Category = "DayNightCycleStartDay")
 	void StartDay();
@@ -42,6 +44,5 @@ protected:
 	int Wave;
 
 private:
-	
 	
 };

@@ -17,44 +17,44 @@ class SKRYMT_API UProductionManager : public UObject
 protected:
 	//VARIABLES
 //Variables to say how many citizens that is working on a specific area
-	int iSocialPopulation;
-	int iFarmingPopulation;		//Kommer att behövas splittas upp beroende på hur många olika sätt vi har att samla mat
-	int iGatheringPopulation;
-	int iHuntingPopulation;
-	int iWoodPopulation;
-	int iStonePopulation;
-	int iMiningPopulation;
+	int SocialPopulation;
+	int FarmingPopulation;		//Kommer att behövas splittas upp beroende på hur många olika sätt vi har att samla mat
+	int GatheringPopulation;
+	int HuntingPopulation;
+	int WoodPopulation;
+	int StonePopulation;
+	int MiningPopulation;
 
 	TArray<int32> TodaysProduction;
 	
 	UPROPERTY(BlueprintReadWrite)
-	int iPossibleCitizensForWork = 50;
+	int PossibleCitizensForWork = 50;
 
 public:
 	/** Gets the amount of people working from the SOCIAL slider in production menu*/
 	UFUNCTION(BlueprintCallable, Category = "ProductionManager")
-		void GetSocialPopulationFromGUI(int SliderValue) { iSocialPopulation = SliderValue; };
+		void GetSocialPopulationFromGUI(int SliderValue) { SocialPopulation = SliderValue; };
 	/** Gets the amount of people working from the FOOD slider in production menu*/
 	UFUNCTION(BlueprintCallable, Category = "ProductionManager")
-		void GetFarmingPopulationFromGUI(int SliderValue) { iFarmingPopulation = SliderValue; };
+		void GetFarmingPopulationFromGUI(int SliderValue) { FarmingPopulation = SliderValue; };
 	/** Gets the amount of people working from the FOOD slider in production menu*/
 	UFUNCTION(BlueprintCallable, Category = "ProductionManager")
-		void GetGatheringPopulationFromGUI(int SliderValue) { iGatheringPopulation = SliderValue; };
+		void GetGatheringPopulationFromGUI(int SliderValue) { GatheringPopulation = SliderValue; };
 	/** Gets the amount of people working from the FOOD slider in production menu*/
 	UFUNCTION(BlueprintCallable, Category = "ProductionManager")
-		void GetHuntingPopulationFromGUI(int SliderValue) { iHuntingPopulation = SliderValue; };
+		void GetHuntingPopulationFromGUI(int SliderValue) { HuntingPopulation = SliderValue; };
 	/** Gets the amount of people working from the WOOD slider in production menu*/
 	UFUNCTION(BlueprintCallable, Category = "ProductionManager")
-		void GetWoodPopulationFromGUI(int SliderValue) { iWoodPopulation = SliderValue; };
+		void GetWoodPopulationFromGUI(int SliderValue) { WoodPopulation = SliderValue; };
 	/** Gets the amount of people working from the STONE slider in production menu*/
 	UFUNCTION(BlueprintCallable, Category = "ProductionManager")
-		void GetStonePopulationFromGUI(int SliderValue) { iStonePopulation = SliderValue; };
+		void GetStonePopulationFromGUI(int SliderValue) { StonePopulation = SliderValue; };
 	/** Gets the amount of people working from the MINING slider in production menu*/
 	UFUNCTION(BlueprintCallable, Category = "ProductionManager")
-		void GetMiningPopulationFromGUI(int SliderValue) { iMiningPopulation = SliderValue; };
+		void GetMiningPopulationFromGUI(int SliderValue) { MiningPopulation = SliderValue; };
 
 	UFUNCTION(BlueprintCallable, Category = "ProductionManager")
-		void UpdatePossibleCitizensForWork(int SliderValue) { iPossibleCitizensForWork = SliderValue; };
+		void UpdatePossibleCitizensForWork(int SliderValue) { PossibleCitizensForWork = SliderValue; };
 
 	/** Function called at the end of the day */
 	UFUNCTION(BlueprintCallable, Category = "ProductionManager")
