@@ -64,3 +64,8 @@ Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+
+# XCode Files
+*.xcworkspacedata
+*.xcuserstate
+*.xcsettings
