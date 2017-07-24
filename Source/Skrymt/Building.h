@@ -83,6 +83,9 @@ public:
 	//Function to change mesh of the Building
 	UFUNCTION(BlueprintCallable)
 		void MeshChange(FString filepath);
+
+	UFUNCTION(BlueprintCallable, Category = "Building")
+	void SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewHousing, uint8 NewGarrison);
 	
 
 
