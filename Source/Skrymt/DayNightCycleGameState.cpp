@@ -14,7 +14,6 @@ void ADayNightCycleGameState::StartDay()
 {
 	ASkrymtPlayerState* PlayerState = Cast<ASkrymtPlayerState>(GetWorld()->GetFirstPlayerController()->PlayerState);
 	PlayerState->UpdateResources(PlayerState->ResourceManager->GetTodaysResources());
-
 	Day++;
 }
 
