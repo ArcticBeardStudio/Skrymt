@@ -5,11 +5,9 @@
 #include "ResourceManager.h"
 #include "EventManager.h"
 
-
 void ASkrymtPlayerState::BeginPlay()
 {
 	Super::BeginPlay();
-
 	ProductionManager = NewObject<UProductionManager>(this);
 	ResourceManager = NewObject<UResourceManager>(this);
 	EventManager = NewObject<UEventManager>(this);
