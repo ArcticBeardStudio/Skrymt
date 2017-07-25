@@ -27,12 +27,13 @@ void ABuilding::Repair(uint8 Modifier)
 	Health += Modifier;
 }
 
-void ABuilding::SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewHousing, uint8 NewGarrison)
+void ABuilding::SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewHousing, uint8 NewGarrison, uint8 NewProductionNeeded)
 {
 	Health = NewHealth;
 	Armor = NewArmor;
 	Housing = NewHousing;
 	Garrison = NewGarrison;
+	ProductionNeeded = NewProductionNeeded;
 	UE_LOG(LogTemp, Warning, TEXT("Set Variables Building"));
 }
 

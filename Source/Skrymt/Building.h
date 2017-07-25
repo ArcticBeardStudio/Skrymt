@@ -22,7 +22,8 @@ struct FBuildingData : public FTableRowBase
 		uint8 Housing;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
 		uint8 Garrison;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
+		uint8 ProductionNeeded;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
 		FString Mesh;
 
@@ -67,6 +68,9 @@ protected:
 	//Garrison Variable
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
 		uint8 Garrison;
+	//Production Variable
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
+		uint8 ProductionNeeded;
 public:
 
 
@@ -85,7 +89,7 @@ public:
 		void MeshChange(FString filepath);
 
 	UFUNCTION(BlueprintCallable, Category = "Building")
-	void SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewHousing, uint8 NewGarrison);
+	void SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewHousing, uint8 NewGarrison, uint8 NewProductionNeeded);
 	
 
 
