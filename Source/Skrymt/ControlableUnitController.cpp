@@ -45,8 +45,7 @@ AControlableUnitController::AControlableUnitController()
 
 	BlackboardComp = CreateDefaultSubobject<UBlackboardComponent>(FName("BlackboardComp"));
 
-	static ConstructorHelpers::FObjectFinder<UBehaviorTree> BTOb(TEXT("BehaviorTree'/Game/Behavior/Villager/BT_BasicControlableUnit.BT_BasicControlableUnit'"));
-	BehaviorTree = BTOb.Object;
+	
 
 	AIPerceptionComponent = CreateDefaultSubobject<UAIPerceptionComponent>(FName("PerceptionComp"));
 
