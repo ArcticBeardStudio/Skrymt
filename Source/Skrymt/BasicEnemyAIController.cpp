@@ -77,7 +77,7 @@ void ABasicEnemyAIController::Possess(APawn* InPawn)
 		BlackboardComp->InitializeBlackboard(*BehaviorTree->BlackboardAsset);
 		BehaviorTreeComp->StartTree(*BehaviorTree);
 		BlackboardComp->SetValueAsVector(Home, InPawn->GetActorLocation());
-		BlackboardComp->SetValueAsVector(LocationToGo, InPawn->GetActorLocation() + FVector(10, 0, 0));
+		
 		BlackboardComp->SetValueAsFloat(Scale, 0.1f);
 	}
 
