@@ -7,6 +7,21 @@
 #include "GameFramework/Actor.h"
 #include "Building.generated.h"
 
+//Used to define which resource the building will produce
+UENUM()
+enum class ResourceTypes : uint8
+{
+	Gold,
+	Wood,
+	Stone,
+	Ore,
+	Food,
+	Science,
+	Happiness,
+	Weapons,
+	none
+};
+
 //BluePrintTable For information for buildings 
 USTRUCT(Blueprintable)
 struct FBuildingData : public FTableRowBase
@@ -25,10 +40,12 @@ struct FBuildingData : public FTableRowBase
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
 		uint8 ProductionNeeded;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
+		ResourceTypes ResourceType;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
+		uint8 ResourcePerWorker;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
 		FString Mesh;
-
-
-
 };
 
 UCLASS()
@@ -71,10 +88,15 @@ protected:
 	//Production Variable
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
 		uint8 ProductionNeeded;
+	//Production Variable
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
+		ResourceTypes ResourceType;
+	//Production Variable
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
+		uint8 ResourcePerWorker;
+
 public:
 
-
-	
 	//Function to handle construction of the Building
 	UFUNCTION(BlueprintCallable)
 		virtual void Construction(uint8 modifier);
@@ -89,7 +111,7 @@ public:
 		void MeshChange(FString filepath);
 
 	UFUNCTION(BlueprintCallable, Category = "Building")
-	void SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewHousing, uint8 NewGarrison, uint8 NewProductionNeeded);
+	void SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewHousing, uint8 NewGarrison, uint8 NewProductionNeeded, ResourceTypes NewResourceType, uint8 NewResourcePerWorker);
 	
 
 
