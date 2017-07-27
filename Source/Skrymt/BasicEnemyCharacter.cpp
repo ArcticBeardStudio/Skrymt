@@ -32,3 +32,16 @@ void ABasicEnemyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 
 }
 
+void ABasicEnemyCharacter::DamageRecieved(uint8 damage)
+{
+	Health = Health - damage;
+}
+
+bool ABasicEnemyCharacter::CheckIfAlive()
+{
+	return Health <= 0;
+}
+void ABasicEnemyCharacter::SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewProductionNeeded, uint8 NewGarrison, uint8 NewDamage, uint8 NewHitChance, uint8 NewAttackSpeed, uint8 NewRange)
+{
+
+}

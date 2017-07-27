@@ -80,4 +80,6 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	class UEventManager* EventManager;
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Player State")
+	void EventTriggered(UEventObject* EventObject);
 };

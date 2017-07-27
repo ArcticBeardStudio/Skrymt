@@ -35,7 +35,8 @@ EBTNodeResult::Type UBTTask_ChooseRandomLocationC::ExecuteTask(class UBehaviorTr
 	//If both valid get the blackboard component of the pawn
 	AActor* Pawn = nullptr;
 	FVector Actorlocation;
-	FVector NewLocation;
+	//FVector NewLocation;
+	FNavLocation NewLocation;
 	FName Key = FName("MoveToLocation");
 	UBlackboardComponent* BlackboardComp = nullptr;
 	if (AICon && (AICon->GetPawn()))
@@ -43,14 +44,15 @@ EBTNodeResult::Type UBTTask_ChooseRandomLocationC::ExecuteTask(class UBehaviorTr
 		Pawn = AICon->GetPawn();
 		Actorlocation = Pawn->GetActorLocation();
 		UNavigationSystem* NavSys = UNavigationSystem::GetCurrent(Pawn);
-		NewLocation =  NavSys->GetRandomReachablePointInRadius(Pawn->GetWorld(),Actorlocation, 2000.f);
+		NavSys->GetRandomReachablePointInRadius(Actorlocation, 2000.f, NewLocation);//   GetRandomReachablePointInRadius(Pawn->GetWorld(), Actorlocation, 2000.f);
+		
 		BlackboardComp = UAIBlueprintHelperLibrary::GetBlackboard(Pawn);
 	}
 
 	//If the blackboard component is valid print out a text
 	if (BlackboardComp)
 	{
-		BlackboardComp->SetValueAsVector(Key, NewLocation);
+		BlackboardComp->SetValueAsVector(Key, NewLocation.Location);
 		//UE_LOG(LogTemp, Warning, TEXT("BlackBoardComponent successfully found!"));
 		return EBTNodeResult::Succeeded;
 	}

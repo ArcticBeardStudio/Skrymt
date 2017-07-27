@@ -14,8 +14,9 @@ void ADayNightCycleGameState::StartDay()
 {
 	ASkrymtPlayerState* PlayerState = Cast<ASkrymtPlayerState>(GetWorld()->GetFirstPlayerController()->PlayerState);
 	PlayerState->UpdateResources(PlayerState->ResourceManager->GetTodaysResources());
-
 	Day++;
+
+	OnStartDay.Broadcast();
 }
 
 //** Call this when "End day" button is pressed in the HUD. Determines whether we go to the next day or wave *//

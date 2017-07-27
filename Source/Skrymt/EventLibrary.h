@@ -43,6 +43,90 @@ struct FWeatherEventData : public FTableRowBase
 	TSet<FName> ReceivedTags;
 };
 
+//Data that contains all information showed on the buttons inside a Event pop-up
+USTRUCT(BlueprintType)
+struct FEventOptionData : public FTableRowBase
+{
+	GENERATED_BODY()
+
+	// UI text for the Title
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Event Option Data")
+	FText Title;
+
+	// UI text for the Description
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Event Option Data")
+	FText Description;
+
+	// UI text for the Cost
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Event Option Data")
+	FText Cost;
+	
+	// Events that get triggered by this option
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Event Option Data")
+	TArray<FName> TriggeredEvents;
+};
+
+//Data that contains all information showed on the Event pop-up
+USTRUCT(BlueprintType)
+struct FEventDescriptionData : public FTableRowBase
+{
+	GENERATED_BODY()
+
+	// UI text for the Title
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Event Description Data")
+	FText Title;
+
+	// UI text for the Description
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Event Description Data")
+	FText Description;
+
+	// UI text for the Cost
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Event Description Data")
+	FText Cost;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Event Description Data")
+	FName ImagePath;
+
+	// Events that get triggered by this option
+	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Event Option Data")
+	//TArray<FName> Children;
+};
+
+//Data that contains all the variables for the event
+USTRUCT(BlueprintType)
+struct FEventInitiationData : public FTableRowBase
+{
+	GENERATED_BODY()
+
+	//Name of the event
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Event Initiation Data")
+	FName ID;
+
+	//Duration for how long the event shoul be active
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Event Initiation Data")
+	int32 Duration;
+
+	//Number of Children an event has
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Event Initiation Data")
+	int32 NumberOfChildren;
+
+	//Tags given to the world when the event is active
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Event Initiation Data")
+	TSet<FName> EffectTags;
+
+	//Tags given to the world when the event is created
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Event Initiation Data")
+	TSet<FName> TagsRecevied;
+
+	//Tags given to the world when the event is terminated
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Event Initiation Data")
+	TSet<FName> TagsLost;
+
+	//Name of all the children the event have
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Event Initiation Data")
+	TArray<FName> Children;
+};
+
 /**
  * 
  */
