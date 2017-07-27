@@ -79,7 +79,7 @@ void AAIVillagerController::Possess(APawn* InPawn)
 		BehaviorTreeComp->StartTree(*BehaviorTree);
 		BlackboardComp->SetValueAsVector(Home, InPawn->GetActorLocation());
 		
-		BlackboardComp->SetValueAsFloat(Scale, 0.1f);
+		
 	}
 
 

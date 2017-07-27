@@ -29,7 +29,7 @@ struct FBuildingData : public FTableRowBase
 	GENERATED_USTRUCT_BODY()
 
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
 		uint8 Health;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
 		uint8 Armor;
