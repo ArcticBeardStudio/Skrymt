@@ -52,7 +52,7 @@ EBTNodeResult::Type UBTTask_ChooseRandomLocationC::ExecuteTask(class UBehaviorTr
 	//If the blackboard component is valid print out a text
 	if (BlackboardComp)
 	{
-		BlackboardComp->SetValueAsVector(Key, NewLocation);
+		BlackboardComp->SetValueAsVector(Key, NewLocation.Location);
 		//UE_LOG(LogTemp, Warning, TEXT("BlackBoardComponent successfully found!"));
 		return EBTNodeResult::Succeeded;
 	}

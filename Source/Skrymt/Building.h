@@ -38,7 +38,9 @@ struct FBuildingData : public FTableRowBase
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
 		uint8 Garrison;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
-		uint8 ProductionNeeded;
+		uint8 DaysToComplete;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
+		uint8 MaxWorkerInBuilding;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
 		ResourceTypes ResourceType;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
@@ -66,8 +68,6 @@ public:
 
 	}
 
-
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -85,17 +85,25 @@ protected:
 	//Garrison Variable
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
 		uint8 Garrison;
-	//Production Variable
+	//Number of days to complete the building
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
-		uint8 ProductionNeeded;
-	//Production Variable
+		uint8 DaysToComplete;
+	//How many workers that can work in the building
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
+		uint8 MaxWorkerInBuilding;
+	//The resource this building produces
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
 		ResourceTypes ResourceType;
-	//Production Variable
+	//How many resources this building will add per worker
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
 		uint8 ResourcePerWorker;
 
+	uint8 DaysWorkedOnBuilding = 0;
+	bool bIsComplete = false;
+
 public:
+	UFUNCTION()
+		void StartedDay();
 
 	//Function to handle construction of the Building
 	UFUNCTION(BlueprintCallable)
@@ -109,12 +117,12 @@ public:
 	//Function to change mesh of the Building
 	UFUNCTION(BlueprintCallable)
 		void MeshChange(FString filepath);
+	//Function to change mesh of the Building
+	UFUNCTION(BlueprintPure, Category = "Building")
+		int GetDaysLeftToConstruct();
 
 	UFUNCTION(BlueprintCallable, Category = "Building")
-	void SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewHousing, uint8 NewGarrison, uint8 NewProductionNeeded, ResourceTypes NewResourceType, uint8 NewResourcePerWorker);
-	
-
-
+	void SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewHousing, uint8 NewGarrison, uint8 NewDaysToComplete, uint8 NewMaxWorkerInBuilding, ResourceTypes NewResourceType, uint8 NewResourcePerWorker);
 
 };
 

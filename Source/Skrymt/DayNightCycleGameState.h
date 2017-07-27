@@ -6,6 +6,8 @@
 #include "GameFramework/GameStateBase.h"
 #include "DayNightCycleGameState.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnStartDay);
+
 /**
  * 
  */
@@ -20,6 +22,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "DayNightCycleStartDay")
 	void StartDay();
+	FOnStartDay OnStartDay;
 
 	UFUNCTION(BlueprintCallable, Category="DayNightCycleEndDay")
 	bool EndDay();
