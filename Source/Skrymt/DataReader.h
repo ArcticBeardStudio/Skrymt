@@ -4,6 +4,7 @@
 
 #include "Engine.h"
 #include "DataLibrary.h"
+#include "EventLibrary.h"
 #include "UObject/NoExportTypes.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "DataReader.generated.h"
@@ -43,8 +44,12 @@ public:
 	// Gets the data associated to the Action with the given name
 	UFUNCTION(BlueprintCallable, Category = "DataReader")
 	static FActionData GetActionData(FName RowName);
+	
 	// Gets the data associated to the ApllyEffect with the given name
 	UFUNCTION(BlueprintCallable, Category = "DataReader")
 	static FApplyEffectData GetApplyEffectData(FName RowName);
 
+	/** Function called when the event is created, reads the data for the event */
+	UFUNCTION(BlueprintCallable, Category = "DataReader")
+	static FEventInitiationData GetEventData(FName RowName);
 };
