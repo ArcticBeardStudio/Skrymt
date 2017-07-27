@@ -27,7 +27,7 @@ private:
 	UBehaviorTreeComponent* BehaviorTreeComp;
 
 	/** Blackboard Key Value Name */
-	const FName BlackboardEnemyKey = FName("Enemy");
+	const FName BlackboardEnemyKey = FName("PlayerUnit");
 	const FName Home = FName("Home");
 	const FName LocationToGo = FName("LocationToGo");
 	const FName Fleeing = FName("Fleeing");

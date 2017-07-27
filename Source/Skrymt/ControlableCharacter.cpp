@@ -7,7 +7,7 @@
 AControlableCharacter::AControlableCharacter()
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	//PrimaryActorTick.bCanEverTick = true;
 
 }
 
@@ -32,16 +32,4 @@ void AControlableCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 
 }
 
-void AControlableCharacter::DamageRecieved(uint8 damage)
-{
-	Health = Health - damage;
-}
 
-bool AControlableCharacter::CheckIfAlive()
-{
-	return Health <= 0;
-}
-void AControlableCharacter::SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewProductionNeeded, uint8 NewGarrison, uint8 NewDamage, uint8 NewHitChance, uint8 NewAttackSpeed, uint8 NewRange)
-{
-
-}
