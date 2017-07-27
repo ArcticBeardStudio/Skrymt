@@ -15,7 +15,7 @@ void ABasicEnemyAIController::OnPerceptionUpdated(TArray<AActor*> UpdatedActors)
 {
 	//If our character exists inside the UpdatedActors array, register him
 	//to our blackboard component
-	FName Enemy = FName("Enemy");
+	FName Enemy = FName("PlayerOwned");
 
 	for (AActor* Actor : UpdatedActors)
 	{
@@ -77,8 +77,8 @@ void ABasicEnemyAIController::Possess(APawn* InPawn)
 		BlackboardComp->InitializeBlackboard(*BehaviorTree->BlackboardAsset);
 		BehaviorTreeComp->StartTree(*BehaviorTree);
 		BlackboardComp->SetValueAsVector(Home, InPawn->GetActorLocation());
-		BlackboardComp->SetValueAsVector(LocationToGo, InPawn->GetActorLocation() + FVector(10, 0, 0));
-		BlackboardComp->SetValueAsFloat(Scale, 0.1f);
+		
+		
 	}
 
 

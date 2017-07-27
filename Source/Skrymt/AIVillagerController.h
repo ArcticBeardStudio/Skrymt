@@ -30,7 +30,7 @@ private:
 	const FName Home = FName("Home");
 	const FName LocationToGo = FName("LocationToGo");
 	const FName Fleeing = FName("Fleeing");
-	const FName Scale = FName("Scale");
+	
 	/** The function that fires when the perception of our AI gets updated */
 	UFUNCTION()
 		void OnPerceptionUpdated(TArray<AActor*> UpdatedActors);

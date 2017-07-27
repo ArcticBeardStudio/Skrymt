@@ -32,3 +32,16 @@ void AControlableCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 
 }
 
+void AControlableCharacter::DamageRecieved(uint8 damage)
+{
+	Health = Health - damage;
+}
+
+bool AControlableCharacter::CheckIfAlive()
+{
+	return Health <= 0;
+}
+void AControlableCharacter::SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewProductionNeeded, uint8 NewGarrison, uint8 NewDamage, uint8 NewHitChance, uint8 NewAttackSpeed, uint8 NewRange)
+{
+
+}

@@ -32,7 +32,7 @@ private:
 	const FName Home = FName("Home");
 	const FName LocationToGo = FName("LocationToGo");
 	const FName Fleeing = FName("Fleeing");
-	const FName Scale = FName("Scale");
+	
 	/** The function that fires when the perception of our AI gets updated */
 	UFUNCTION()
 		void OnPerceptionUpdated(TArray<AActor*> UpdatedActors);
@@ -52,6 +52,7 @@ protected:
 	/** The Perception Component of our AI */
 	UPROPERTY(EditAnywhere)
 		UAIPerceptionComponent* AIPerceptionComponent;
+	
 
 public:
 
@@ -61,6 +62,6 @@ public:
 	void SetBehaviorTree(UBehaviorTree NewBehaviorTree);
 	/** Returns the seeing pawn. Returns null, if our AI has no target */
 	AActor* GetSeeingPawn();
-
+	
 
 };
