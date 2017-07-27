@@ -22,3 +22,11 @@ FApplyEffectData UDataReader::GetApplyEffectData(FName RowName)
 	FString ContextString;
 	return *ActionDataTable->FindRow<FApplyEffectData>(RowName, ContextString);
 }
+
+
+FEventInitiationData UDataReader::GetEventData(FName RowName)
+{
+	UDataTable* ActionDataTable = LoadObject<UDataTable>(NULL, TEXT("/Game/Data/Events/FEventInitiationData.FEventInitiationData"), NULL, LOAD_None, NULL);
+	FString ContextString;
+	return *ActionDataTable->FindRow<FEventInitiationData>(RowName, ContextString);
+}
