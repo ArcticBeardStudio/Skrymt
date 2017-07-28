@@ -15,6 +15,9 @@ void ASkrymtPlayerState::BeginPlay()
 	BuildingManager = NewObject<UBuildingManager>(this);
 
 	BuildingManager->OnConstructBuilding.AddDynamic(ResourceManager, &UResourceManager::OnConstructedBuilding);
+
+	EventManager->OnEventTriggered.AddDynamic(this, &ASkrymtPlayerState::EventTriggered);
+
 }
 
 //Argument is a array where the indices are : { food, wood, stone, ore, gold }
@@ -40,4 +43,10 @@ void ASkrymtPlayerState::EndOfTheDay()
 	ResourceManager->SetTodaysResources();
 	UpdateResources(ResourceManager->GetTodaysResources());
 	UpdateWeather(EventManager->GetNextWeatherFromDecider());
+	EventManager->UpdateEvents();
+}
+
+void ASkrymtPlayerState::EventTriggered_Implementation(UEventObject* EventObject)
+{
+	GEngine->AddOnScreenDebugMessage(20, 10.f, FColor::Red, FString::Printf(TEXT("Event '%s' added"), *EventObject->ID.ToString()));
 }

@@ -2,18 +2,28 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
-#include "GameFramework/Character.h"
+
+#include "BaseUnit.h"
 #include "VillagerCharacter.generated.h"
 
 UCLASS()
-class SKRYMT_API AVillagerCharacter : public ACharacter
+class SKRYMT_API AVillagerCharacter : public ABaseUnit
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this character's properties
 	AVillagerCharacter();
+
+
+
+
+
+	AVillagerCharacter(const FObjectInitializer& ObjectInitializer)
+	{
+		AbilityComponent = ObjectInitializer.CreateDefaultSubobject<UAbilitySystemComponent>(this, TEXT("Ability"));
+
+	}
 
 protected:
 	// Called when the game starts or when spawned
