@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ResourceManager.h"
+#include "Building.h"
+#include "SkrymtPlayerState.h"
 
 void UResourceManager::EndOfDay()
 {
@@ -49,4 +51,9 @@ int UResourceManager::GetOreResource()
 int UResourceManager::GetGoldResource()
 {
 	return GoldResource;
+}
+
+void UResourceManager::OnConstructedBuilding(ABuilding* ConstructedBuilding)
+{
+	UE_LOG(LogTemp, Warning, TEXT("In Constructed Building Resource Manager"));
 }

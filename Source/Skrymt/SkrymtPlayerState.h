@@ -80,4 +80,6 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	class UEventManager* EventManager;
 
+	UPROPERTY(BlueprintReadOnly)
+	class UBuildingManager* BuildingManager;
 };

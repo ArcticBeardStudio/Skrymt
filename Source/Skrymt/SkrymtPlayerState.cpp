@@ -4,6 +4,7 @@
 #include "ProductionManager.h"
 #include "ResourceManager.h"
 #include "EventManager.h"
+#include "BuildingManager.h"
 
 void ASkrymtPlayerState::BeginPlay()
 {
@@ -11,13 +12,14 @@ void ASkrymtPlayerState::BeginPlay()
 	ProductionManager = NewObject<UProductionManager>(this);
 	ResourceManager = NewObject<UResourceManager>(this);
 	EventManager = NewObject<UEventManager>(this);
+	BuildingManager = NewObject<UBuildingManager>(this);
 
+	BuildingManager->OnConstructBuilding.AddDynamic(ResourceManager, &UResourceManager::OnConstructedBuilding);
 }
 
 //Argument is a array where the indices are : { food, wood, stone, ore, gold }
 void ASkrymtPlayerState::UpdateResources(TArray<int32> Resources)
 {
-
 	iFoodResource = iFoodResource + Resources[0];
 	iWoodResource = iWoodResource + Resources[1];
 	iStoneResource = iStoneResource + Resources[2];

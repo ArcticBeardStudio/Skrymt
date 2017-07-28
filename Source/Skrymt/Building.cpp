@@ -2,23 +2,23 @@
 
 #include "Building.h"
 #include "DayNightCycleGameState.h"
-
-
+#include "BuildingManager.h"
+#include "SkrymtPlayerState.h"
 
 // Called when the game starts or when spawned
 void ABuilding::BeginPlay()
 {
 	Super::BeginPlay();
-
 }
 
 void ABuilding::StartedDay()
 {
-	if (GetDaysLeftToConstruct() <= 0) 
+	if (GetDaysLeftToConstruct() <= 1) 
 	{
 		if (bIsComplete == false)
 		{
-			bIsComplete = true; 
+			DaysWorkedOnBuilding++;
+			Construction();
 		}
 		return;
 	}
@@ -26,8 +26,11 @@ void ABuilding::StartedDay()
 	GEngine->AddOnScreenDebugMessage(30, 10.f, FColor::Blue, FString::Printf(TEXT("Days Worked = '%d'"), DaysWorkedOnBuilding));
 }
 
-void ABuilding::Construction(uint8 Modifier)
+void ABuilding::Construction()
 {
+	bIsComplete = true;
+	BuildingManagerRef->OnConstructBuilding.Broadcast(this);
+	UE_LOG(LogTemp, Warning, TEXT("In Construction Building"));
 	//ADayNightCycleGameState* GameState = (ADayNightCycleGameState*)GetWorld()->GetGameState();
 	//GameState->OnStartDay.AddDynamic(this, &ABuilding::StartedDay);
 }
@@ -60,6 +63,8 @@ void ABuilding::SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewHousing, 
 	UE_LOG(LogTemp, Warning, TEXT("Set Variables Building"));
 	ADayNightCycleGameState* GameState = (ADayNightCycleGameState*)GetWorld()->GetGameState();
 	GameState->OnStartDay.AddDynamic(this, &ABuilding::StartedDay);
+	ASkrymtPlayerState* PlayerState = Cast<ASkrymtPlayerState>(GetWorld()->GetFirstPlayerController()->PlayerState);
+	BuildingManagerRef = PlayerState->BuildingManager;
 }
 
 void ABuilding::MeshChange(FString Filepath)
@@ -74,6 +79,15 @@ void ABuilding::MeshChange(FString Filepath)
 
 }
 
+ResourceTypes ABuilding::GetResourceType()
+{
+	return ResourceType;
+}
+
+bool ABuilding::CheckComplete()
+{
+	return bIsComplete;
+}
 /*
 WoodBaseProd = 10 + NewBase
 
