@@ -18,6 +18,7 @@ void ASkrymtPlayerState::BeginPlay()
 
 	EventManager->OnEventTriggered.AddDynamic(this, &ASkrymtPlayerState::EventTriggered);
 
+	EventManager->OnEventTriggered.AddDynamic(this, &ASkrymtPlayerState::EventTriggered);
 }
 
 //Argument is a array where the indices are : { food, wood, stone, ore, gold }

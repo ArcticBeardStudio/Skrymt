@@ -8,9 +8,6 @@
 #include "BuildingStructs.h"
 #include "Building.generated.h"
 
-
-
-
 UCLASS()
 class SKRYMT_API ABuilding : public AActor
 {
