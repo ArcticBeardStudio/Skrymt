@@ -41,20 +41,41 @@ private:
 
 protected:
 	/** A Sight Sense config for our AI */
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Perception")
+	//UPROPERTY(EditAnywhere)
 		UAISenseConfig_Sight* Sight;
 
 	/** The Behavior Tree that contains the logic of our AI */
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ai")
+	//UPROPERTY(EditAnywhere)
 		UBehaviorTree* BehaviorTree;
 
 	/** The Perception Component of our AI */
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Perception")
 		UAIPerceptionComponent* AIPerceptionComponent;
 
 public:
 
-	ABasicEnemyAIController();
+	//ABasicEnemyAIController();
+
+	ABasicEnemyAIController(const FObjectInitializer& ObjectInitializer);
+	//{
+	//	Sight = ObjectInitializer.CreateDefaultSubobject<UAISenseConfig_Sight>(this, TEXT("SightSense"));
+
+
+	//	Sight->SightRadius = 2000.f;
+	//	Sight->LoseSightRadius = 2100.f;
+	//	Sight->PeripheralVisionAngleDegrees = 360.f;
+	//	//Sight->SetMaxAge(15.f);
+
+	//	//Tell the sight sense to detect everything
+	//	Sight->DetectionByAffiliation.bDetectEnemies = true;
+	//	Sight->DetectionByAffiliation.bDetectFriendlies = true;
+	//	Sight->DetectionByAffiliation.bDetectNeutrals = true;
+
+	//	//Register the sight sense to our Perception Component
+	//	AIPerceptionComponent->ConfigureSense(*Sight);
+	//}
 
 	virtual void Possess(APawn* InPawn) override;
 

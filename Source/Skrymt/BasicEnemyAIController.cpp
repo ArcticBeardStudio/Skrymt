@@ -27,7 +27,7 @@ void ABasicEnemyAIController::OnPerceptionUpdated(TArray<AActor*> UpdatedActors)
 		{
 			//Actor->ActorHasTag(Enemy);
 			BlackboardComp->SetValueAsObject(BlackboardEnemyKey, Actor);
-			BlackboardComp->SetValueAsBool(Fleeing, true);
+			//BlackboardComp->SetValueAsBool(Fleeing, true);
 			return;
 		}
 		//}
@@ -40,22 +40,24 @@ void ABasicEnemyAIController::OnPerceptionUpdated(TArray<AActor*> UpdatedActors)
 
 
 
-ABasicEnemyAIController::ABasicEnemyAIController()
+ABasicEnemyAIController::ABasicEnemyAIController(const FObjectInitializer& ObjectInitializer)
 {
 	//Components Init.
-	BehaviorTreeComp = CreateDefaultSubobject<UBehaviorTreeComponent>(FName("BehaviorComp"));
+	BehaviorTreeComp = CreateDefaultSubobject<UBehaviorTreeComponent>(TEXT("BehaviorComp"));
 
-	BlackboardComp = CreateDefaultSubobject<UBlackboardComponent>(FName("BlackboardComp"));
+	BlackboardComp = CreateDefaultSubobject<UBlackboardComponent>(TEXT("BlackboardComp"));
 
 
-	AIPerceptionComponent = CreateDefaultSubobject<UAIPerceptionComponent>(FName("PerceptionComp"));
+	AIPerceptionComponent = CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("PerceptionComp"));
 
 	//Create a Sight Sense
-	Sight = CreateDefaultSubobject<UAISenseConfig_Sight>(FName("Sight Config"));
+
+	Sight = ObjectInitializer.CreateDefaultSubobject<UAISenseConfig_Sight>(this, TEXT("Sight Config"));
+	//Sight = CreateDefaultSubobject<UAISenseConfig_Sight>(FName("Sight Config"));
 
 	Sight->SightRadius = 2000.f;
 	Sight->LoseSightRadius = 2100.f;
-	Sight->PeripheralVisionAngleDegrees = 120.f;
+	Sight->PeripheralVisionAngleDegrees = 360.f;
 	//Sight->SetMaxAge(15.f);
 
 	//Tell the sight sense to detect everything

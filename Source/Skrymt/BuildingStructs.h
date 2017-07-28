@@ -1,7 +1,7 @@
 #pragma once
 #include "Engine.h"
 #include "GameFramework/Actor.h"
-#include "Structs.generated.h"
+#include "BuildingStructs.generated.h"
 
 //Used to define which resource the building will produce
 UENUM()

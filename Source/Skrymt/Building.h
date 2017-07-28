@@ -5,7 +5,7 @@
 //#include "CoreMinimal.h"
 #include "Engine.h"
 #include "GameFramework/Actor.h"
-#include "Structs.h"
+#include "BuildingStructs.h"
 #include "Building.generated.h"
 
 
