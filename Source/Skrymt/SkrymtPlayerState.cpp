@@ -4,6 +4,7 @@
 #include "ProductionManager.h"
 #include "ResourceManager.h"
 #include "EventManager.h"
+#include "BuildingManager.h"
 
 void ASkrymtPlayerState::BeginPlay()
 {
@@ -11,7 +12,9 @@ void ASkrymtPlayerState::BeginPlay()
 	ProductionManager = NewObject<UProductionManager>(this);
 	ResourceManager = NewObject<UResourceManager>(this);
 	EventManager = NewObject<UEventManager>(this);
+	BuildingManager = NewObject<UBuildingManager>(this);
 
+	BuildingManager->OnConstructBuilding.AddDynamic(ResourceManager, &UResourceManager::OnConstructedBuilding);
 	EventManager->OnEventTriggered.AddDynamic(this, &ASkrymtPlayerState::EventTriggered);
 }
 

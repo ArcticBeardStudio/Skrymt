@@ -62,13 +62,19 @@ protected:
 	uint8 DaysWorkedOnBuilding = 0;
 	bool bIsComplete = false;
 
+	class UBuildingManager* BuildingManagerRef;
+
 public:
 	UFUNCTION()
 		void StartedDay();
 
+	//Function to return ResourceType of building
+	UFUNCTION(BlueprintCallable)
+		ResourceTypes GetResourceType();
+
 	//Function to handle construction of the Building
 	UFUNCTION(BlueprintCallable)
-		virtual void Construction(uint8 modifier);
+		virtual void Construction();
 	//Function to handle Production of the Building
 	UFUNCTION(BlueprintCallable)
 		virtual void Produce(uint8 modifier);
@@ -81,6 +87,9 @@ public:
 	//Function to change mesh of the Building
 	UFUNCTION(BlueprintPure, Category = "Building")
 		int GetDaysLeftToConstruct();
+
+	UFUNCTION(BlueprintCallable)
+		bool CheckComplete();
 
 	UFUNCTION(BlueprintCallable, Category = "Building")
 	void SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewHousing, uint8 NewGarrison, uint8 NewDaysToComplete, uint8 NewMaxWorkerInBuilding, ResourceTypes NewResourceType, uint8 NewResourcePerWorker);
