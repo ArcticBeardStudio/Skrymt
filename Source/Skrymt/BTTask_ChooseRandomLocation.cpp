@@ -45,7 +45,7 @@ EBTNodeResult::Type UBTTask_ChooseRandomLocationC::ExecuteTask(class UBehaviorTr
 		Actorlocation = Pawn->GetActorLocation();
 		UNavigationSystem* NavSys = UNavigationSystem::GetCurrent(Pawn);
 		NavSys->GetRandomReachablePointInRadius(Actorlocation, 2000.f, NewLocation);//   GetRandomReachablePointInRadius(Pawn->GetWorld(), Actorlocation, 2000.f);
-		
+	/*	Pawn->GetActorRotation()*/
 		BlackboardComp = UAIBlueprintHelperLibrary::GetBlackboard(Pawn);
 	}
 

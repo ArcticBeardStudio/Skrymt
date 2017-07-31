@@ -17,5 +17,5 @@ TArray<int32> UProductionManager::GetTodaysProduction()
 
 void UProductionManager::SetTodaysProduction()
 {
-	TodaysProduction = { FarmingPopulation, GatheringPopulation, HuntingPopulation, WoodPopulation, StonePopulation, MiningPopulation, MiningPopulation };
+	TodaysProduction = { FarmingPopulation, GatheringPopulation, HuntingPopulation, FishingPopulation, MiningOrePopulation, MiningGoldPopulation, QuarryingPopulation, ForestryPopulation, SciencePopulation};
 }

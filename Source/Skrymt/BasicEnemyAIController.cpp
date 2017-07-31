@@ -40,25 +40,24 @@ void ABasicEnemyAIController::OnPerceptionUpdated(TArray<AActor*> UpdatedActors)
 
 
 
-ABasicEnemyAIController::ABasicEnemyAIController(const FObjectInitializer& ObjectInitializer)
+ABasicEnemyAIController::ABasicEnemyAIController()
 {
 	//Components Init.
-	BehaviorTreeComp = CreateDefaultSubobject<UBehaviorTreeComponent>(TEXT("BehaviorComp"));
+	BehaviorTreeComp = CreateDefaultSubobject<UBehaviorTreeComponent>(FName("BehaviorComp"));
 
-	BlackboardComp = CreateDefaultSubobject<UBlackboardComponent>(TEXT("BlackboardComp"));
+	BlackboardComp = CreateDefaultSubobject<UBlackboardComponent>(FName("BlackboardComp"));
 
 
-	AIPerceptionComponent = CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("PerceptionComp"));
+
+	AIPerceptionComponent = CreateDefaultSubobject<UAIPerceptionComponent>(FName("PerceptionComp"));
 
 	//Create a Sight Sense
+	Sight = CreateDefaultSubobject<UAISenseConfig_Sight>(FName("Sight Config"));
 
-	Sight = ObjectInitializer.CreateDefaultSubobject<UAISenseConfig_Sight>(this, TEXT("Sight Config"));
-	//Sight = CreateDefaultSubobject<UAISenseConfig_Sight>(FName("Sight Config"));
-
-	Sight->SightRadius = 2000.f;
-	Sight->LoseSightRadius = 2100.f;
+	Sight->SightRadius = 1000.f;
+	Sight->LoseSightRadius = 1100.f;
 	Sight->PeripheralVisionAngleDegrees = 360.f;
-	//Sight->SetMaxAge(15.f);
+	Sight->SetMaxAge(15.f);
 
 	//Tell the sight sense to detect everything
 	Sight->DetectionByAffiliation.bDetectEnemies = true;
