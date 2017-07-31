@@ -22,19 +22,28 @@ protected:
 	int StoneResource;
 	int OreResource;
 	int GoldResource;
+	int Happiness;
 
-//The base production for each area of resource gathering
+	//Food resource base productions
 	float FarmingBaseProduction = 1.0f;
 	float GatheringBaseProduction = 1.0f;
 	float HuntingBaseProduction = 1.0f;
 	float FishingBaseProduction = 1.0f;
-	
+
+	//Stone resource base productions
 	float MiningOreBaseProduction = 1.0f;
+
+	//Gold resource base productions
 	float MiningGoldBaseProduction = 1.0f;
 	
+	//Ore resource base productions
 	float QuarryingBaseProduction = 1.0f;
 	
+	//Wood resource base productions
 	float ForestryBaseProduction = 1.0f;
+
+	//Science resource base productions
+	float ScienceBaseProduction = 1.0f;
 
 	TArray<int32> TodaysResources;
 
@@ -64,4 +73,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "ResourceManager")
 		TArray<int32> GetTodaysResources();
+
+	UFUNCTION(BlueprintCallable, Category = "ResourceManager")
+	void OnConstructedBuilding(ABuilding* ConstructedBuilding);
 };
