@@ -7,6 +7,7 @@
 
 #include "Perception/AIPerceptionComponent.h"
 #include "Perception/AISenseConfig_Sight.h"
+#include "Perception/AISense_Hearing.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"
 #include "BasicEnemyAIController.generated.h"
 
@@ -27,10 +28,12 @@ private:
 	UBehaviorTreeComponent* BehaviorTreeComp;
 
 	/** Blackboard Key Value Name */
+	int check = 0;
 	const FName BlackboardEnemyKey = FName("PlayerUnit");
 	const FName Home = FName("Home");
 	const FName LocationToGo = FName("LocationToGo");
 	const FName Fleeing = FName("Fleeing");
+	const FName NewTarget = FName("NewTarget");
 
 	/** The function that fires when the perception of our AI gets updated */
 	UFUNCTION()
@@ -43,6 +46,8 @@ protected:
 	/** A Sight Sense config for our AI */
 	UPROPERTY(EditAnywhere)
 		UAISenseConfig_Sight* Sight;
+	UPROPERTY(EditAnywhere)
+		UAISenseConfig_Hearing* Hearing;
 
 	/** The Behavior Tree that contains the logic of our AI */
 	UPROPERTY(EditAnywhere)

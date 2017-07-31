@@ -1,13 +1,14 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+
 #include "BasicEnemyAIController.h"
+#include "Engine.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"
 #include "BehaviorTree/BehaviorTree.h"
-//#include "VillagerCharacter.h"
-//#include "ControlableCharacter.h"
-//#include  "Barrack.h"
-#include <vector>
+
+
+//#include <vector>
 
 
 
@@ -16,26 +17,53 @@ void ABasicEnemyAIController::OnPerceptionUpdated(TArray<AActor*> UpdatedActors)
 	//If our character exists inside the UpdatedActors array, register him
 	//to our blackboard component
 	FName Enemy = FName("PlayerOwned");
-
+	
+	AActor* me;
+	me = this->GetCharacter();
 	for (AActor* Actor : UpdatedActors)
 	{
-		/*for (FName Enemy : Enemyclassnames)
-		Actor->IsA<AControlableCharacter>()
-		{*/
+		
 		//Check if actor has enemy tag 
 		if (Actor->ActorHasTag(Enemy) && !GetSeeingPawn())
 		{
+			check += 1;
+			AActor* other = (AActor*)BlackboardComp->GetValueAsObject(BlackboardEnemyKey);
+			UE_LOG(LogTemp, Warning, TEXT("perception"));
+			//GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, FString::Printf(TEXT("playerunit = '%d'"), check));
 			//Actor->ActorHasTag(Enemy);
-			BlackboardComp->SetValueAsObject(BlackboardEnemyKey, Actor);
+			
+			if (other != Actor)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("distance check"));
+				GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, FString::Printf(TEXT("distance_to_blackboard = '%f'"), me->GetDistanceTo(other)));
+				
+				GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, FString::Printf(TEXT("distance_to_new = '%f'"), me->GetSquaredDistanceTo(Actor)));
+				
+				if (me->GetDistanceTo(other) > me->GetSquaredDistanceTo(Actor))
+				{
+					BlackboardComp->SetValueAsObject(BlackboardEnemyKey, Actor);
+					BlackboardComp->SetValueAsBool(NewTarget, true);
+					
+					GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, FString::Printf(TEXT("Changedtarget = '%d'"), check));
+				}
+
+				
+			}
+			else
+			{
+				
+				BlackboardComp->SetValueAsObject(BlackboardEnemyKey, Actor);
+			}
 			//BlackboardComp->SetValueAsBool(Fleeing, true);
 			return;
 		}
 		//}
 	}
+
 	//UE_LOG(LogTemp, Log, TEXT("Hello world!"));
 	//The character doesn't exist in our updated actors - so make sure
 	//to delete any previous reference of him from the blackboard
-	BlackboardComp->SetValueAsObject(BlackboardEnemyKey, nullptr);
+	//BlackboardComp->SetValueAsObject(BlackboardEnemyKey, nullptr);
 }
 
 
@@ -54,18 +82,32 @@ ABasicEnemyAIController::ABasicEnemyAIController()
 	//Create a Sight Sense
 	Sight = CreateDefaultSubobject<UAISenseConfig_Sight>(FName("Sight Config"));
 
+	
+
 	Sight->SightRadius = 1000.f;
 	Sight->LoseSightRadius = 1100.f;
 	Sight->PeripheralVisionAngleDegrees = 360.f;
-	Sight->SetMaxAge(15.f);
+	//Sight->SetMaxAge(15.f);
 
 	//Tell the sight sense to detect everything
 	Sight->DetectionByAffiliation.bDetectEnemies = true;
 	Sight->DetectionByAffiliation.bDetectFriendlies = true;
 	Sight->DetectionByAffiliation.bDetectNeutrals = true;
 
+
 	//Register the sight sense to our Perception Component
 	AIPerceptionComponent->ConfigureSense(*Sight);
+
+	//Create a Hearing Sense
+	//Hearing = CreateDefaultSubobject<UAISenseConfig_Hearing>(FName("Hearing Config"));
+
+	//Hearing->HearingRange = 1000.f;
+
+	////Tell the Hearing sense to detect everything
+	//Hearing->DetectionByAffiliation.bDetectEnemies = true;
+	/*Hearing->DetectionByAffiliation.bDetectFriendlies = true;
+	Hearing->DetectionByAffiliation.bDetectNeutrals = true;*/
+
 }
 
 void ABasicEnemyAIController::Possess(APawn* InPawn)
