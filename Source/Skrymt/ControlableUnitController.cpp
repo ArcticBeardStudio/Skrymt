@@ -30,7 +30,7 @@ void AControlableUnitController::OnPerceptionUpdated(TArray<AActor*> UpdatedActo
 		}
 		//}
 	}
-	//UE_LOG(LogTemp, Log, TEXT("Hello world!"));
+	
 	//The character doesn't exist in our updated actors - so make sure
 	//to delete any previous reference of him from the blackboard
 	BlackboardComp->SetValueAsObject(BlackboardEnemyKey, nullptr);
