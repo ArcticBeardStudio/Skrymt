@@ -31,8 +31,6 @@ void ABuilding::Construction()
 	bIsComplete = true;
 	BuildingManagerRef->OnConstructBuilding.Broadcast(this);
 	UE_LOG(LogTemp, Warning, TEXT("In Construction Building"));
-	//ADayNightCycleGameState* GameState = (ADayNightCycleGameState*)GetWorld()->GetGameState();
-	//GameState->OnStartDay.AddDynamic(this, &ABuilding::StartedDay);
 }
 
 void ABuilding::Produce(uint8 Modifier)
@@ -45,12 +43,17 @@ void ABuilding::Repair(uint8 Modifier)
 	Health += Modifier;
 }
 
+int ABuilding::GetHousing()
+{
+	return Housing;
+}
+
 int ABuilding::GetDaysLeftToConstruct()
 {
 	return DaysToComplete - DaysWorkedOnBuilding;
 }
 
-void ABuilding::SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewHousing, uint8 NewGarrison, uint8 NewDaysToComplete, uint8 NewMaxWorkerInBuilding, ResourceTypes NewResourceType, uint8 NewResourcePerWorker)
+void ABuilding::SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewHousing, uint8 NewGarrison, uint8 NewDaysToComplete, uint8 NewMaxWorkerInBuilding, ResourceTypes NewResourceType, uint8 NewResourcePerWorker, FBuildingCost NewBuildingCost)
 {
 	Health = NewHealth;
 	Armor = NewArmor;
@@ -60,6 +63,7 @@ void ABuilding::SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewHousing, 
 	MaxWorkerInBuilding = NewMaxWorkerInBuilding;
 	ResourceType = NewResourceType;
 	ResourcePerWorker = NewResourcePerWorker;
+	BuildingCost = NewBuildingCost;
 	UE_LOG(LogTemp, Warning, TEXT("Set Variables Building"));
 	ADayNightCycleGameState* GameState = (ADayNightCycleGameState*)GetWorld()->GetGameState();
 	GameState->OnStartDay.AddDynamic(this, &ABuilding::StartedDay);
@@ -88,6 +92,12 @@ bool ABuilding::CheckComplete()
 {
 	return bIsComplete;
 }
+
+int ABuilding::GetResourcePerWorker()
+{
+	return ResourcePerWorker;
+}
+
 /*
 WoodBaseProd = 10 + NewBase
 

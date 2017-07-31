@@ -18,11 +18,13 @@ protected:
 	//VARIABLES
 //Variables to that hold the count for a resource
 	int FoodResource;
-	int WoodResource;
-	int StoneResource;
 	int OreResource;
 	int GoldResource;
+	int StoneResource;
+	int WoodResource;
 	int Happiness;
+	int Housing;
+	int ScienceResource;
 
 	//Food resource base productions
 	float FarmingBaseProduction = 1.0f;
@@ -60,7 +62,12 @@ public:
 		int GetOreResource();
 	UFUNCTION(BlueprintPure, Category = "ResourceManager")
 		int GetGoldResource();
-
+	UFUNCTION(BlueprintPure, Category = "ResourceManager")
+		int GetScienceResource();
+	UFUNCTION(BlueprintPure, Category = "ResourceManager")
+		int GetHousingResource();
+	UFUNCTION(BlueprintPure, Category = "ResourceManager")
+		int GetHappinessResource();
 	/** Function called at the end of the day */
 	UFUNCTION(BlueprintCallable, Category = "ResourceManager")
 		void EndOfDay();
@@ -74,6 +81,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "ResourceManager")
 		TArray<int32> GetTodaysResources();
 
+	//Add the constructed building's resource to base production, ugly fix
 	UFUNCTION(BlueprintCallable, Category = "ResourceManager")
 	void OnConstructedBuilding(ABuilding* ConstructedBuilding);
+
+	//Remove the constructed building's resource from base production, ugly fix
+	UFUNCTION(BlueprintCallable, Category = "ResourceManager")
+	void RemoveProductionFromBuilding(ABuilding* ConstructedBuilding);
 };
