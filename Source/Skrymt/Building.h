@@ -58,6 +58,9 @@ protected:
 	//How many resources this building will add per worker
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
 		uint8 ResourcePerWorker;
+	//How much the building costs to build
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
+		FBuildingCost BuildingCost;
 
 	uint8 DaysWorkedOnBuilding = 0;
 	bool bIsComplete = false;
@@ -88,11 +91,18 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Building")
 		int GetDaysLeftToConstruct();
 
+	UFUNCTION(BlueprintCallable, Category = "Building")
+		int GetResourcePerWorker();
+
+	//Function to get the maximum housing in the building
+	UFUNCTION(BlueprintCallable, Category = "Building")
+		int GetHousing();
+
 	UFUNCTION(BlueprintCallable)
 		bool CheckComplete();
 
 	UFUNCTION(BlueprintCallable, Category = "Building")
-	void SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewHousing, uint8 NewGarrison, uint8 NewDaysToComplete, uint8 NewMaxWorkerInBuilding, ResourceTypes NewResourceType, uint8 NewResourcePerWorker);
+	void SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewHousing, uint8 NewGarrison, uint8 NewDaysToComplete, uint8 NewMaxWorkerInBuilding, ResourceTypes NewResourceType, uint8 NewResourcePerWorker, FBuildingCost NewBuildingCost);
 
 };
 

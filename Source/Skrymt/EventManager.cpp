@@ -9,10 +9,10 @@ TSet<FName> UEventManager::GetNextWeatherFromDecider()
 	EventDecider = NewObject<UEventDecider>(GetOuter());
 	FName NewWeather = EventDecider->GetNextWeather();
 
-	if (NewWeather == FName("Raining"))
-	{
-		AddEvent(FName("BuildingAccident"));
-	}
+	//if (NewWeather == FName("Raining"))
+	//{
+		//AddEvent(FName("BuildingAccident"));
+	//}
 
 	GEngine->AddOnScreenDebugMessage(10, 10.f, FColor::Emerald, FString::Printf(TEXT("Next weather is: '%s'"), *NewWeather.ToString()));
 
