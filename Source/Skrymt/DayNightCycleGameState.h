@@ -17,6 +17,7 @@ class SKRYMT_API ADayNightCycleGameState : public AGameStateBase
 	GENERATED_BODY()
 	
 public:
+	void DayNightCycleGameState();
 
 	virtual void BeginPlay() override;
 
