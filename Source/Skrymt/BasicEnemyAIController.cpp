@@ -2,6 +2,7 @@
 
 
 #include "BasicEnemyAIController.h"
+#include "BasicEnemyCharacter.h"
 #include "Engine.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"
@@ -18,8 +19,9 @@ void ABasicEnemyAIController::OnPerceptionUpdated(TArray<AActor*> UpdatedActors)
 	//to our blackboard component
 	FName Enemy = FName("PlayerOwned");
 	
-	AActor* me;
-	me = this->GetCharacter();
+	//AActor* me;
+	ABasicEnemyCharacter* me = (ABasicEnemyCharacter*)GetCharacter();
+	//me = this->GetCharacter();
 	for (AActor* Actor : UpdatedActors)
 	{
 		
@@ -27,19 +29,20 @@ void ABasicEnemyAIController::OnPerceptionUpdated(TArray<AActor*> UpdatedActors)
 		if (Actor->ActorHasTag(Enemy) && !GetSeeingPawn())
 		{
 			check += 1;
-			AActor* other = (AActor*)BlackboardComp->GetValueAsObject(BlackboardEnemyKey);
+			UObject* other = BlackboardComp->GetValueAsObject(BlackboardEnemyKey);
+			
 			UE_LOG(LogTemp, Warning, TEXT("perception"));
 			//GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, FString::Printf(TEXT("playerunit = '%d'"), check));
 			//Actor->ActorHasTag(Enemy);
 			
-			if (other != Actor)
+			if (other != BlackboardComp->GetValueAsObject(NoneRef))
 			{
 				UE_LOG(LogTemp, Warning, TEXT("distance check"));
-				GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, FString::Printf(TEXT("distance_to_blackboard = '%f'"), me->GetDistanceTo(other)));
+				GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, FString::Printf(TEXT("distance_to_blackboard = '%f'"), me->GetDistanceTo((AActor*)other)));
 				
 				GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, FString::Printf(TEXT("distance_to_new = '%f'"), me->GetSquaredDistanceTo(Actor)));
 				
-				if (me->GetDistanceTo(other) > me->GetSquaredDistanceTo(Actor))
+				if (me->GetDistanceTo((AActor*)other) > me->GetSquaredDistanceTo(Actor))
 				{
 					BlackboardComp->SetValueAsObject(BlackboardEnemyKey, Actor);
 					BlackboardComp->SetValueAsBool(NewTarget, true);
@@ -74,7 +77,7 @@ ABasicEnemyAIController::ABasicEnemyAIController()
 	BehaviorTreeComp = CreateDefaultSubobject<UBehaviorTreeComponent>(FName("BehaviorComp"));
 
 	BlackboardComp = CreateDefaultSubobject<UBlackboardComponent>(FName("BlackboardComp"));
-
+	
 
 
 	AIPerceptionComponent = CreateDefaultSubobject<UAIPerceptionComponent>(FName("PerceptionComp"));
@@ -97,17 +100,20 @@ ABasicEnemyAIController::ABasicEnemyAIController()
 
 	//Register the sight sense to our Perception Component
 	AIPerceptionComponent->ConfigureSense(*Sight);
+	
 
 	//Create a Hearing Sense
-	//Hearing = CreateDefaultSubobject<UAISenseConfig_Hearing>(FName("Hearing Config"));
+	Hearing = CreateDefaultSubobject<UAISenseConfig_Hearing>(FName("Hearing Config"));
 
-	//Hearing->HearingRange = 1000.f;
+	Hearing->HearingRange = 1000.f;
 
 	////Tell the Hearing sense to detect everything
-	//Hearing->DetectionByAffiliation.bDetectEnemies = true;
+	Hearing->DetectionByAffiliation.bDetectEnemies = true;
 	/*Hearing->DetectionByAffiliation.bDetectFriendlies = true;
 	Hearing->DetectionByAffiliation.bDetectNeutrals = true;*/
 
+
+	AIPerceptionComponent->ConfigureSense(*Hearing);
 }
 
 void ABasicEnemyAIController::Possess(APawn* InPawn)

@@ -7,7 +7,7 @@
 
 #include "Perception/AIPerceptionComponent.h"
 #include "Perception/AISenseConfig_Sight.h"
-#include "Perception/AISense_Hearing.h"
+#include "Perception/AISenseConfig_Hearing.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"
 #include "BasicEnemyAIController.generated.h"
 
@@ -33,7 +33,9 @@ private:
 	const FName Home = FName("Home");
 	const FName LocationToGo = FName("LocationToGo");
 	const FName Fleeing = FName("Fleeing");
-	const FName NewTarget = FName("NewTarget");
+	const FName NewTarget = FName("NewTarget"); 
+	const FName NoneRef = FName("NoneRef");
+
 
 	/** The function that fires when the perception of our AI gets updated */
 	UFUNCTION()
