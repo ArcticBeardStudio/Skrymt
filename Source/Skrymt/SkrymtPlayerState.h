@@ -6,6 +6,8 @@
 #include "GameFramework/PlayerState.h"
 #include "SkrymtPlayerState.generated.h"
 
+#define LOCTEXT_NAMESPACE "Namespace"
+
 /**
  * 
  */
@@ -14,7 +16,11 @@ class SKRYMT_API ASkrymtPlayerState : public APlayerState
 {
 	GENERATED_BODY()
 	
-	
+private:
+
+	FText PlayerName = LOCTEXT("PlayerName", "[Name]");
+	FText TownName = LOCTEXT("TownName", "[TownName]");
+
 public:
 	//VARIABLES
 	//-----------------------------------------------------
@@ -85,4 +91,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Player State")
 	void EventTriggered(UEventObject* EventObject);
+
+
+#undef LOCTEXT_NAMESPACE 
 };

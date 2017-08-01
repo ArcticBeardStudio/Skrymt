@@ -4,8 +4,14 @@
 #include "SkrymtPlayerState.h"
 #include "ResourceManager.h"
 
+void ADayNightCycleGameState::DayNightCycleGameState()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Constructor game state"));
+}
+
 void ADayNightCycleGameState::BeginPlay()
 {
+	UE_LOG(LogTemp, Warning, TEXT("Begin play game state"));
 	Super::BeginPlay();
 }
 
