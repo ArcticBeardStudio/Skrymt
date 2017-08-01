@@ -69,6 +69,12 @@ void ABuilding::SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewHousing, 
 	GameState->OnStartDay.AddDynamic(this, &ABuilding::StartedDay);
 	ASkrymtPlayerState* PlayerState = Cast<ASkrymtPlayerState>(GetWorld()->GetFirstPlayerController()->PlayerState);
 	BuildingManagerRef = PlayerState->BuildingManager;
+	PlayerState->UpdateResourcesConstruct(NewBuildingCost);
+	if (DaysToComplete == 0)
+	{
+		Construction();
+	}
+
 }
 
 void ABuilding::MeshChange(FString Filepath)

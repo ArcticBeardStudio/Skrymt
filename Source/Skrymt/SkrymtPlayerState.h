@@ -68,6 +68,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Player State")
 	void UpdateResources(TArray<int32> Resources);
 
+	/** Function to change all resources when constructing building*/
+	UFUNCTION(BlueprintCallable, Category = "Player State")
+	void UpdateResourcesConstruct(FBuildingCost BuildingCost);
+
+	/** Function to check if we have enough money to construct the building*/
+	UFUNCTION(BlueprintCallable, Category = "Player State")
+	bool CheckEnoughResources(FBuildingCost BuildingCost);
+
 	/** Function to change all resources */
 	//UFUNCTION(BlueprintCallable, Category = "GameManager")
 	void UpdateWeather(TSet<FName> NewWeatherTags);
