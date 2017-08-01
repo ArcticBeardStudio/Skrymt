@@ -28,21 +28,28 @@ void ABasicEnemyAIController::OnPerceptionUpdated(TArray<AActor*> UpdatedActors)
 		//Check if actor has enemy tag 
 		if (Actor->ActorHasTag(Enemy) && !GetSeeingPawn())
 		{
-			check += 1;
-			UObject* other = BlackboardComp->GetValueAsObject(BlackboardEnemyKey);
-			
+			check += 1; 
+			//BlackboardComp->SetValueAsObject(CurrentCheckedTarget, );
+			temptarget = BlackboardComp->GetValueAsObject(BlackboardEnemyKey);
+			//Blackboardobject = BlackboardComp->GetValueAsObject(CurrentCheckedTarget);
 			UE_LOG(LogTemp, Warning, TEXT("perception"));
 			//GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, FString::Printf(TEXT("playerunit = '%d'"), check));
 			//Actor->ActorHasTag(Enemy);
+			//IsValid((AActor*)temptarget->IsUnreachable
+			// BlackboardComp->GetValueAsString(BlackboardEnemyKey);
 			
-			if (other != BlackboardComp->GetValueAsObject(NoneRef))
+			
+			
+			
+			if (IsValid(BlackboardComp->GetValueAsObject(BlackboardEnemyKey)))
 			{
+				
 				UE_LOG(LogTemp, Warning, TEXT("distance check"));
-				GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, FString::Printf(TEXT("distance_to_blackboard = '%f'"), me->GetDistanceTo((AActor*)other)));
+				GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, FString::Printf(TEXT("distance_to_blackboard = '%f'"), me->GetSquaredDistanceTo((AActor*)BlackboardComp->GetValueAsObject(BlackboardEnemyKey))));
 				
 				GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, FString::Printf(TEXT("distance_to_new = '%f'"), me->GetSquaredDistanceTo(Actor)));
 				
-				if (me->GetDistanceTo((AActor*)other) > me->GetSquaredDistanceTo(Actor))
+				if (me->GetSquaredDistanceTo((AActor*)temptarget) > me->GetSquaredDistanceTo(Actor))
 				{
 					BlackboardComp->SetValueAsObject(BlackboardEnemyKey, Actor);
 					BlackboardComp->SetValueAsBool(NewTarget, true);
@@ -54,7 +61,7 @@ void ABasicEnemyAIController::OnPerceptionUpdated(TArray<AActor*> UpdatedActors)
 			}
 			else
 			{
-				
+				UE_LOG(LogTemp, Warning, TEXT("set blackboardenemy"));
 				BlackboardComp->SetValueAsObject(BlackboardEnemyKey, Actor);
 			}
 			//BlackboardComp->SetValueAsBool(Fleeing, true);

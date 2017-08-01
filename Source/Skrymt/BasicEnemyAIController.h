@@ -34,7 +34,7 @@ private:
 	const FName LocationToGo = FName("LocationToGo");
 	const FName Fleeing = FName("Fleeing");
 	const FName NewTarget = FName("NewTarget"); 
-	const FName NoneRef = FName("NoneRef");
+	const FName CurrentCheckedTarget = FName("CurrentCheckedTargetLocation");
 
 
 	/** The function that fires when the perception of our AI gets updated */
@@ -43,6 +43,9 @@ private:
 
 	///** A Sight Sense config for our AI */
 	//UAISenseConfig_Sight* Sight;
+
+	UObject* temptarget;
+	UObject* Blackboardobject;
 
 protected:
 	/** A Sight Sense config for our AI */
