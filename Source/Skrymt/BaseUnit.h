@@ -32,6 +32,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	//General variables
+	
 
 	//Health Variable
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BasicUnit")

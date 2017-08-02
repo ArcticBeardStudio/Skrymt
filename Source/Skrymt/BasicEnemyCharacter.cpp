@@ -31,4 +31,3 @@ void ABasicEnemyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 }
-
