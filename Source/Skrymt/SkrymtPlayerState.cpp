@@ -5,6 +5,8 @@
 #include "ResourceManager.h"
 #include "EventManager.h"
 #include "BuildingManager.h"
+#include "SkrymtGameInstance.h"
+#include "BuildingStructs.h"
 
 void ASkrymtPlayerState::BeginPlay()
 {
@@ -16,6 +18,22 @@ void ASkrymtPlayerState::BeginPlay()
 
 	BuildingManager->OnConstructBuilding.AddDynamic(ResourceManager, &UResourceManager::OnConstructedBuilding);
 	EventManager->OnEventTriggered.AddDynamic(this, &ASkrymtPlayerState::EventTriggered);
+
+	USkrymtGameInstance* SGI = Cast<USkrymtGameInstance>(GetGameInstance());
+	if (SGI)
+	{
+		PlayerName = SGI->GetPlayerName();
+		TownName = SGI->GetTownName();
+		FString PN = PlayerName.ToString();
+		UE_LOG(LogTemp, Log, TEXT("PlayerName: %s"), *PN);
+		FString TN = TownName.ToString();
+		UE_LOG(LogTemp, Log, TEXT("TownName: %s"), *TN);
+		if (SGI->GetFromMenu())
+		{
+			//Spawn buildings
+		}
+	}
+	
 }
 
 //Argument is a array where the indices are : { food, wood, stone, ore, gold }
@@ -43,6 +61,24 @@ void ASkrymtPlayerState::EndOfTheDay()
 	UpdateResources(ResourceManager->GetTodaysResources());
 	UpdateWeather(EventManager->GetNextWeatherFromDecider());
 	EventManager->UpdateEvents();
+}
+
+void ASkrymtPlayerState::UpdateResourcesConstruct(FBuildingCost BuildingCost)
+{
+	iFoodResource -= BuildingCost.FoodCost;
+	iWoodResource -= BuildingCost.WoodCost;
+	iStoneResource -= BuildingCost.StoneCost;
+	iOreResource -= BuildingCost.OreCost;
+	iGoldResource -= BuildingCost.GoldCost;
+}
+
+bool ASkrymtPlayerState::CheckEnoughResources(FBuildingCost BuildingCost)
+{
+	if (iFoodResource >= BuildingCost.FoodCost && iWoodResource >= BuildingCost.WoodCost && iStoneResource >= BuildingCost.StoneCost && iOreResource >= BuildingCost.OreCost && iGoldResource >= BuildingCost.GoldCost)
+	{
+		return true;
+	}
+	return false;	
 }
 
 void ASkrymtPlayerState::EventTriggered_Implementation(UEventObject* EventObject)
