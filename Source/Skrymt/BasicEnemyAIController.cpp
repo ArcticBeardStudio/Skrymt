@@ -17,65 +17,7 @@ void ABasicEnemyAIController::OnPerceptionUpdated(TArray<AActor*> UpdatedActors)
 {
 	//If our character exists inside the UpdatedActors array, register him
 	//to our blackboard component
-	//FName Enemy = FName("PlayerOwned");
-	//
-	////AActor* me;
-	//ABasicEnemyCharacter* me = (ABasicEnemyCharacter*)GetCharacter();
-	////me = this->GetCharacter();
-	//for (AActor* Actor : UpdatedActors)
-	//{
-	//	
-	//	//Check if actor has enemy tag 
-	//	if (Actor->ActorHasTag(Enemy) && !GetSeeingPawn())
-	//	{
-	//		check += 1; 
-	//		//BlackboardComp->SetValueAsObject(CurrentCheckedTarget, );
-	//		temptarget = BlackboardComp->GetValueAsObject(BlackboardEnemyKey);
-	//		//Blackboardobject = BlackboardComp->GetValueAsObject(CurrentCheckedTarget);
-	//		UE_LOG(LogTemp, Warning, TEXT("perception"));
-	//		//GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, FString::Printf(TEXT("playerunit = '%d'"), check));
-	//		//Actor->ActorHasTag(Enemy);
-	//		//IsValid((AActor*)temptarget->IsUnreachable
-	//		// BlackboardComp->GetValueAsString(BlackboardEnemyKey);
-	//		if (temptarget->IsValidLowLevel())
-	//		{
-	//			FVector locations = Cast<AActor>(temptarget)->GetActorLocation();
-	//			GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, FString::Printf(TEXT("distance_to_blackboard = '%f' , '%f', '%f'  "), locations.X, locations.Y, locations.Z));
-	//		}
-	//		/*FVector locations = Cast<AActor>(temptarget)->GetActorLocation();
-	//		
-	//		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, FString::Printf(TEXT("distance_to_blackboard = '%f' , '%f', '%f'  "), locations.X, locations.Y, locations.Z)) ;*/
-	//		//Cast<AActor>(temptarget)->GetActorLocation()
-	//		
-	//		
-	//		if(BlackboardComp->GetValueAsObject(BlackboardEnemyKey))
-	//		{
-	//			
-	//			UE_LOG(LogTemp, Warning, TEXT("distance check"));
-	//			GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, FString::Printf(TEXT("distance_to_blackboard = '%f'"), me->GetSquaredDistanceTo(Cast<AActor>(BlackboardComp->GetValueAsObject(BlackboardEnemyKey)))));
-	//			
-	//			GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, FString::Printf(TEXT("distance_to_new = '%f'"), me->GetSquaredDistanceTo(Actor)));
-	//			
-	//			if (me->GetSquaredDistanceTo((AActor*)temptarget) > me->GetSquaredDistanceTo(Actor))
-	//			{
-	//				BlackboardComp->SetValueAsObject(BlackboardEnemyKey, Actor);
-	//				BlackboardComp->SetValueAsBool(NewTarget, true);
-	//				
-	//				GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, FString::Printf(TEXT("Changedtarget = '%d'"), check));
-	//			}
-
-	//			
-	//		}
-	//		else
-	//		{
-	//			UE_LOG(LogTemp, Warning, TEXT("set blackboardenemy"));
-	//			BlackboardComp->SetValueAsObject(BlackboardEnemyKey, Actor);
-	//		}
-	//		//BlackboardComp->SetValueAsBool(Fleeing, true);
-	//		return;
-	//	}
-	//	//}
-	//}
+	
 
 	////UE_LOG(LogTemp, Log, TEXT("Hello world!"));
 	////The character doesn't exist in our updated actors - so make sure
