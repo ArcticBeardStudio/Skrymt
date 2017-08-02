@@ -44,8 +44,8 @@ private:
 	///** A Sight Sense config for our AI */
 	//UAISenseConfig_Sight* Sight;
 
-	UObject* temptarget;
-	UObject* Blackboardobject;
+	/*UObject* temptarget;
+	UObject* Blackboardobject;*/
 
 protected:
 	/** A Sight Sense config for our AI */
@@ -62,6 +62,10 @@ protected:
 	UPROPERTY(EditAnywhere)
 		UAIPerceptionComponent* AIPerceptionComponent;
 
+	//** Array with actors in perceptionrange from units*/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TargetSearch")
+		TArray<AActor*> viewableActors;
+
 public:
 
 	
@@ -74,5 +78,15 @@ public:
 	/** Returns the seeing pawn. Returns null, if our AI has no target */
 	AActor* GetSeeingPawn();
 
+
+	/** Adds actor to viewableActors Array */
+	UFUNCTION(BlueprintCallable, Category = "ViewableActors")
+	void AddActorToViewableActor(AActor* actor);
+	/** remove actor from viewableActors Array */
+	UFUNCTION(BlueprintCallable, Category = "ViewableActors")
+	void RemoveActorToViewableActor(AActor* actor);
+	/** checks if actor is in viewableActors Array */
+	UFUNCTION(BlueprintCallable, Category = "ViewableActors")
+	bool ViewableActorHasActor(AActor* actor);
 
 };
