@@ -18,8 +18,8 @@ class SKRYMT_API ASkrymtPlayerState : public APlayerState
 	
 private:
 
-	FText PlayerName = LOCTEXT("PlayerName", "[Name]");
-	FText TownName = LOCTEXT("TownName", "[TownName]");
+	FText PlayerName;// = LOCTEXT("PlayerName", "[Name]");
+	FText TownName;// = LOCTEXT("TownName", "[TownName]");
 
 public:
 	//VARIABLES
@@ -99,6 +99,12 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Player State")
 	void EventTriggered(UEventObject* EventObject);
+
+	UFUNCTION(BlueprintCallable, Category = "Player State")
+	FString GetPlayerName() { return PlayerName.ToString(); };
+
+	UFUNCTION(BlueprintCallable, Category = "Player State")
+	FString GetTownName() { return TownName.ToString(); };
 
 
 #undef LOCTEXT_NAMESPACE 
