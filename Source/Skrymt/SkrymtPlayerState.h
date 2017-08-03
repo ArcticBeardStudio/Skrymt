@@ -6,6 +6,8 @@
 #include "GameFramework/PlayerState.h"
 #include "SkrymtPlayerState.generated.h"
 
+#define LOCTEXT_NAMESPACE "Namespace"
+
 /**
  * 
  */
@@ -14,7 +16,11 @@ class SKRYMT_API ASkrymtPlayerState : public APlayerState
 {
 	GENERATED_BODY()
 	
-	
+private:
+
+	FText PlayerName;// = LOCTEXT("PlayerName", "[Name]");
+	FText TownName;// = LOCTEXT("TownName", "[TownName]");
+
 public:
 	//VARIABLES
 	//-----------------------------------------------------
@@ -62,6 +68,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Player State")
 	void UpdateResources(TArray<int32> Resources);
 
+	/** Function to change all resources when constructing building*/
+	UFUNCTION(BlueprintCallable, Category = "Player State")
+	void UpdateResourcesConstruct(FBuildingCost BuildingCost);
+
+	/** Function to check if we have enough money to construct the building*/
+	UFUNCTION(BlueprintCallable, Category = "Player State")
+	bool CheckEnoughResources(FBuildingCost BuildingCost);
+
 	/** Function to change all resources */
 	//UFUNCTION(BlueprintCallable, Category = "GameManager")
 	void UpdateWeather(TSet<FName> NewWeatherTags);
@@ -80,4 +94,18 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	class UEventManager* EventManager;
 
+	UPROPERTY(BlueprintReadOnly)
+	class UBuildingManager* BuildingManager;
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Player State")
+	void EventTriggered(UEventObject* EventObject);
+
+	UFUNCTION(BlueprintCallable, Category = "Player State")
+	FString GetPlayerName() { return PlayerName.ToString(); };
+
+	UFUNCTION(BlueprintCallable, Category = "Player State")
+	FString GetTownName() { return TownName.ToString(); };
+
+
+#undef LOCTEXT_NAMESPACE 
 };

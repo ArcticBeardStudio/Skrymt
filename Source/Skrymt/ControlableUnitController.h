@@ -20,7 +20,7 @@ class SKRYMT_API AControlableUnitController : public AAIController
 	GENERATED_BODY()
 
 private:
-
+	
 	/** BlackboardComponent - used to initialize blackboard values and set/get values from a blackboard asset */
 	UBlackboardComponent* BlackboardComp;
 

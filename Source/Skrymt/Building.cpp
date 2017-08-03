@@ -2,23 +2,23 @@
 
 #include "Building.h"
 #include "DayNightCycleGameState.h"
-
-
+#include "BuildingManager.h"
+#include "SkrymtPlayerState.h"
 
 // Called when the game starts or when spawned
 void ABuilding::BeginPlay()
 {
 	Super::BeginPlay();
-
 }
 
 void ABuilding::StartedDay()
 {
-	if (GetDaysLeftToConstruct() <= 0) 
+	if (GetDaysLeftToConstruct() <= 1) 
 	{
 		if (bIsComplete == false)
 		{
-			bIsComplete = true; 
+			DaysWorkedOnBuilding++;
+			Construction();
 		}
 		return;
 	}
@@ -26,10 +26,11 @@ void ABuilding::StartedDay()
 	GEngine->AddOnScreenDebugMessage(30, 10.f, FColor::Blue, FString::Printf(TEXT("Days Worked = '%d'"), DaysWorkedOnBuilding));
 }
 
-void ABuilding::Construction(uint8 Modifier)
+void ABuilding::Construction()
 {
-	//ADayNightCycleGameState* GameState = (ADayNightCycleGameState*)GetWorld()->GetGameState();
-	//GameState->OnStartDay.AddDynamic(this, &ABuilding::StartedDay);
+	bIsComplete = true;
+	BuildingManagerRef->OnConstructBuilding.Broadcast(this);
+	UE_LOG(LogTemp, Warning, TEXT("In Construction Building"));
 }
 
 void ABuilding::Produce(uint8 Modifier)
@@ -42,12 +43,17 @@ void ABuilding::Repair(uint8 Modifier)
 	Health += Modifier;
 }
 
+int ABuilding::GetHousing()
+{
+	return Housing;
+}
+
 int ABuilding::GetDaysLeftToConstruct()
 {
 	return DaysToComplete - DaysWorkedOnBuilding;
 }
 
-void ABuilding::SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewHousing, uint8 NewGarrison, uint8 NewDaysToComplete, uint8 NewMaxWorkerInBuilding, ResourceTypes NewResourceType, uint8 NewResourcePerWorker)
+void ABuilding::SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewHousing, uint8 NewGarrison, uint8 NewDaysToComplete, uint8 NewMaxWorkerInBuilding, ResourceTypes NewResourceType, uint8 NewResourcePerWorker, FBuildingCost NewBuildingCost)
 {
 	Health = NewHealth;
 	Armor = NewArmor;
@@ -57,9 +63,18 @@ void ABuilding::SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewHousing, 
 	MaxWorkerInBuilding = NewMaxWorkerInBuilding;
 	ResourceType = NewResourceType;
 	ResourcePerWorker = NewResourcePerWorker;
+	BuildingCost = NewBuildingCost;
 	UE_LOG(LogTemp, Warning, TEXT("Set Variables Building"));
 	ADayNightCycleGameState* GameState = (ADayNightCycleGameState*)GetWorld()->GetGameState();
 	GameState->OnStartDay.AddDynamic(this, &ABuilding::StartedDay);
+	ASkrymtPlayerState* PlayerState = Cast<ASkrymtPlayerState>(GetWorld()->GetFirstPlayerController()->PlayerState);
+	BuildingManagerRef = PlayerState->BuildingManager;
+	PlayerState->UpdateResourcesConstruct(NewBuildingCost);
+	if (DaysToComplete == 0)
+	{
+		Construction();
+	}
+
 }
 
 void ABuilding::MeshChange(FString Filepath)
@@ -72,6 +87,21 @@ void ABuilding::MeshChange(FString Filepath)
 		Tempmesh->SetStaticMesh(MeshToUse);
 	}
 
+}
+
+ResourceTypes ABuilding::GetResourceType()
+{
+	return ResourceType;
+}
+
+bool ABuilding::CheckComplete()
+{
+	return bIsComplete;
+}
+
+int ABuilding::GetResourcePerWorker()
+{
+	return ResourcePerWorker;
 }
 
 /*

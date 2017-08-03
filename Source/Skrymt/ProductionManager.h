@@ -21,9 +21,12 @@ protected:
 	int FarmingPopulation;		//Kommer att behövas splittas upp beroende på hur många olika sätt vi har att samla mat
 	int GatheringPopulation;
 	int HuntingPopulation;
-	int WoodPopulation;
-	int StonePopulation;
-	int MiningPopulation;
+	int FishingPopulation;
+	int MiningOrePopulation;
+	int MiningGoldPopulation;
+	int QuarryingPopulation;
+	int ForestryPopulation;
+	int SciencePopulation;
 
 	TArray<int32> TodaysProduction;
 	
@@ -43,15 +46,24 @@ public:
 	/** Gets the amount of people working from the FOOD slider in production menu*/
 	UFUNCTION(BlueprintCallable, Category = "ProductionManager")
 		void GetHuntingPopulationFromGUI(int SliderValue) { HuntingPopulation = SliderValue; };
-	/** Gets the amount of people working from the WOOD slider in production menu*/
+	/** Gets the amount of people working from the FOOD slider in production menu*/
 	UFUNCTION(BlueprintCallable, Category = "ProductionManager")
-		void GetWoodPopulationFromGUI(int SliderValue) { WoodPopulation = SliderValue; };
-	/** Gets the amount of people working from the STONE slider in production menu*/
-	UFUNCTION(BlueprintCallable, Category = "ProductionManager")
-		void GetStonePopulationFromGUI(int SliderValue) { StonePopulation = SliderValue; };
+		void GetFishingPopulationFromGUI(int SliderValue) { FishingPopulation = SliderValue; };
 	/** Gets the amount of people working from the MINING slider in production menu*/
 	UFUNCTION(BlueprintCallable, Category = "ProductionManager")
-		void GetMiningPopulationFromGUI(int SliderValue) { MiningPopulation = SliderValue; };
+		void GetMiningOrePopulationFromGUI(int SliderValue) { MiningOrePopulation = SliderValue; };
+	/** Gets the amount of people working from the MINING slider in production menu*/
+	UFUNCTION(BlueprintCallable, Category = "ProductionManager")
+		void GetMiningGoldPopulationFromGUI(int SliderValue) { MiningGoldPopulation = SliderValue; };
+	/** Gets the amount of people working from the WOOD slider in production menu*/
+	UFUNCTION(BlueprintCallable, Category = "ProductionManager")
+		void GetQuarryingPopulationFromGUI(int SliderValue) { QuarryingPopulation = SliderValue; };
+	/** Gets the amount of people working from the WOOD slider in production menu*/
+	UFUNCTION(BlueprintCallable, Category = "ProductionManager")
+		void GetWoodPopulationFromGUI(int SliderValue) { ForestryPopulation = SliderValue; };
+	/** Gets the amount of people working from the STONE slider in production menu*/
+	UFUNCTION(BlueprintCallable, Category = "ProductionManager")
+		void GetStonePopulationFromGUI(int SliderValue) { SciencePopulation = SliderValue; };
 
 	UFUNCTION(BlueprintCallable, Category = "ProductionManager")
 		void UpdatePossibleCitizensForWork(int SliderValue) { PossibleCitizensForWork = SliderValue; };
