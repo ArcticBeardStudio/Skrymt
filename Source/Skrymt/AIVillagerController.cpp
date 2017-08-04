@@ -4,7 +4,7 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"
 #include "BehaviorTree/BehaviorTree.h"
-#include "VillagerCharacter.h"
+
 #include "ControlableCharacter.h"
 #include  "Barrack.h"
 #include <vector>
@@ -58,7 +58,10 @@ AAIVillagerController::AAIVillagerController()
 	Sight->LoseSightRadius = 2100.f;
 	Sight->PeripheralVisionAngleDegrees = 120.f;
 	//Sight->SetMaxAge(15.f);
-
+	
+	//BlackboardComp->SetValueAsVector(Home, me->GetActorLocation());
+	
+	
 	//Tell the sight sense to detect everything
 	Sight->DetectionByAffiliation.bDetectEnemies = true;
 	Sight->DetectionByAffiliation.bDetectFriendlies = true;
@@ -66,6 +69,14 @@ AAIVillagerController::AAIVillagerController()
 
 	//Register the sight sense to our Perception Component
 	AIPerceptionComponent->ConfigureSense(*Sight);
+}
+
+void AAIVillagerController::Set()
+{
+	me = (AVillagerCharacter*)GetCharacter();
+	BlackboardComp->SetValueAsFloat(RadiusToWalkFromHome, WalkRadiusFromHome);
+	BlackboardComp->SetValueAsVector(Home, me->GetActorLocation());
+	
 }
 
 void AAIVillagerController::Possess(APawn* InPawn)

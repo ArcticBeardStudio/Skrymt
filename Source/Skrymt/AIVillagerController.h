@@ -4,6 +4,7 @@
 
 
 #include "AIController.h"
+#include "VillagerCharacter.h"
 #include "Perception/AIPerceptionComponent.h"
 #include "Perception/AISenseConfig_Sight.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"
@@ -24,13 +25,14 @@ private:
 
 	/** BehaviorTreeComponent - used to start a behavior tree */
 	UBehaviorTreeComponent* BehaviorTreeComp;
-
+	AVillagerCharacter* me;
 	/** Blackboard Key Value Name */
 	const FName BlackboardEnemyKey = FName("Enemy");
-	const FName Home = FName("Home");
+	const FName Home = FName("HomeLocation");
 	const FName LocationToGo = FName("LocationToGo");
 	const FName Fleeing = FName("Fleeing");
 	
+	const FName RadiusToWalkFromHome = FName("WalkRadiusFromHome");
 	/** The function that fires when the perception of our AI gets updated */
 	UFUNCTION()
 		void OnPerceptionUpdated(TArray<AActor*> UpdatedActors);
@@ -51,6 +53,10 @@ protected:
 	UPROPERTY(EditAnywhere)
 		UAIPerceptionComponent* AIPerceptionComponent;
 
+	/** The Radius the villager can move from Home*/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VillagerControllerStats")
+		uint8 WalkRadiusFromHome;
+
 public:
 
 	AAIVillagerController();
@@ -60,5 +66,6 @@ public:
 	/** Returns the seeing pawn. Returns null, if our AI has no target */
 	AActor* GetSeeingPawn();
 
-
+	UFUNCTION(BlueprintCallable, Category = "Villager")
+		void Set();
 };
