@@ -48,7 +48,7 @@ EBTNodeResult::Type UBTTask_RandomLocationFromHome::ExecuteTask(class UBehaviorT
 		Homelocation = BlackboardComp->GetValueAsVector(Home); //Pawn->GetActorLocation();
 		UNavigationSystem* NavSys = UNavigationSystem::GetCurrent(Pawn);
 		NavSys->GetRandomReachablePointInRadius(Homelocation, Radius, NewLocation);//   GetRandomReachablePointInRadius(Pawn->GetWorld(), Actorlocation, 2000.f);
-																					/*	Pawn->GetActorRotation()*/
+		//NavSys->GetRandomPointInNavigableRadius(Homelocation, Radius, NewLocation);																	/*	Pawn->GetActorRotation()*/
 		
 	}
 

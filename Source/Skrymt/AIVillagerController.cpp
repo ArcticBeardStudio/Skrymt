@@ -88,7 +88,7 @@ void AAIVillagerController::Possess(APawn* InPawn)
 		//Initialize the Blackboard and start the attached behavior tree
 		BlackboardComp->InitializeBlackboard(*BehaviorTree->BlackboardAsset);
 		BehaviorTreeComp->StartTree(*BehaviorTree);
-		BlackboardComp->SetValueAsVector(Home, InPawn->GetActorLocation());
+		//BlackboardComp->SetValueAsVector(Home, InPawn->GetActorLocation());
 		
 		
 	}
