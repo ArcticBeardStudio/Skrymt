@@ -31,7 +31,7 @@ private:
 	const FName Home = FName("HomeLocation");
 	const FName LocationToGo = FName("LocationToGo");
 	const FName Fleeing = FName("Fleeing");
-	
+	 
 	const FName RadiusToWalkFromHome = FName("WalkRadiusFromHome");
 	/** The function that fires when the perception of our AI gets updated */
 	UFUNCTION()
