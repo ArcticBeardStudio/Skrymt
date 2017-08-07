@@ -16,5 +16,11 @@
 				"UMG"
 			]
 		}
+	],
+	"Plugins": [
+		{
+			"Name": "SteamVR",
+			"Enabled": false
+		}
 	]
 }
