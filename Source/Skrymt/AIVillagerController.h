@@ -25,13 +25,14 @@ private:
 
 	/** BehaviorTreeComponent - used to start a behavior tree */
 	UBehaviorTreeComponent* BehaviorTreeComp;
-	AVillagerCharacter* me;
+	//AVillagerCharacter* me;
 	/** Blackboard Key Value Name */
 	const FName BlackboardEnemyKey = FName("Enemy");
 	const FName Home = FName("HomeLocation");
 	const FName LocationToGo = FName("LocationToGo");
 	const FName Fleeing = FName("Fleeing");
-	 
+	const FName Init = FName("Initialized");
+	
 	const FName RadiusToWalkFromHome = FName("WalkRadiusFromHome");
 	/** The function that fires when the perception of our AI gets updated */
 	UFUNCTION()
@@ -58,8 +59,8 @@ protected:
 		uint8 WalkRadiusFromHome;
 
 public:
-
 	AAIVillagerController();
+	//AAIVillagerController(const FObjectInitializer& ObjectInitializer);
 
 	virtual void Possess(APawn* InPawn) override;
 
@@ -68,4 +69,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Villager")
 		void Set();
+
+	UFUNCTION(BlueprintCallable, Category = "Villager")
+
+		float GetWalkRadius();
 };

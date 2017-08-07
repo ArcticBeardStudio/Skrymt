@@ -53,6 +53,7 @@ AAIVillagerController::AAIVillagerController()
 
 	//Create a Sight Sense
 	Sight = CreateDefaultSubobject<UAISenseConfig_Sight>(FName("Sight Config"));
+	//Sight = CreateDefaultSubobject<UAISenseConfig_Sight>(FName("Sight Config"));
 
 	Sight->SightRadius = 2000.f;
 	Sight->LoseSightRadius = 2100.f;
@@ -69,14 +70,28 @@ AAIVillagerController::AAIVillagerController()
 
 	//Register the sight sense to our Perception Component
 	AIPerceptionComponent->ConfigureSense(*Sight);
+
+	
+	BlackboardComp->SetValueAsFloat(RadiusToWalkFromHome, WalkRadiusFromHome);
+	//BlackboardComp->SetValueAsVector(Home, me->GetActorLocation());
+}
+
+//AAIVillagerController::AAIVillagerController()
+//{
+//
+//}
+
+float AAIVillagerController::GetWalkRadius()
+{
+	return WalkRadiusFromHome;
 }
 
 void AAIVillagerController::Set()
 {
-	me = (AVillagerCharacter*)GetCharacter();
-	BlackboardComp->SetValueAsFloat(RadiusToWalkFromHome, WalkRadiusFromHome);
-	BlackboardComp->SetValueAsVector(Home, me->GetActorLocation());
-	
+	/*ACharacter* me = GetCharacter();
+	float test1 = BlackboardComp->SetValueAsFloat(RadiusToWalkFromHome, WalkRadiusFromHome);
+	FVector test2  = BlackboardComp->SetValueAsVector(Home, me->GetActorLocation());
+	bool test3 = BlackboardComp->SetValueAsBool(Init, true);*/
 }
 
 void AAIVillagerController::Possess(APawn* InPawn)
@@ -88,7 +103,7 @@ void AAIVillagerController::Possess(APawn* InPawn)
 		//Initialize the Blackboard and start the attached behavior tree
 		BlackboardComp->InitializeBlackboard(*BehaviorTree->BlackboardAsset);
 		BehaviorTreeComp->StartTree(*BehaviorTree);
-		//BlackboardComp->SetValueAsVector(Home, InPawn->GetActorLocation());
+		BlackboardComp->SetValueAsVector(Home, InPawn->GetActorLocation());
 		
 		
 	}
