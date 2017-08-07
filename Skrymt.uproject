@@ -12,8 +12,15 @@
 				"Engine",
 				"AIModule",
 				"CoreUObject",
-				"UnrealEd"
+				"UnrealEd",
+				"UMG"
 			]
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "SteamVR",
+			"Enabled": false
 		}
 	]
 }
