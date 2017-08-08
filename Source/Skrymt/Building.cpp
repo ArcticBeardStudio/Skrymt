@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Building.h"
-#include "DayNightCycleGameState.h"
+#include "SkrymtGameState.h"
 #include "BuildingManager.h"
 #include "SkrymtPlayerState.h"
 
