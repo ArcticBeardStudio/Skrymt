@@ -6,6 +6,10 @@
 #include "UObject/NoExportTypes.h"
 #include "DataLibrary.generated.h"
 
+/*****************
+* ABILITY SYSTEM *
+*****************/
+
 UENUM(BlueprintType)
 enum class ETargetTypes : uint8
 {
@@ -83,6 +87,43 @@ struct FEffectData : public FTableRowBase
 	TSet<FName> ReceivedTags;
 };
 
+/******************
+* BUILDING SYSTEM *
+******************/
+
+USTRUCT(BlueprintType)
+struct FBuildingData : public FTableRowBase
+{
+	GENERATED_BODY()
+	
+	//Health Variable
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Building")
+	uint8 Health;
+	//Armor Variable
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Building")
+	uint8 Armor;
+	//Housing Variable
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Building")
+	uint8 Housing;
+	//Garrison Variable
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Building")
+	uint8 Garrison;
+	//Number of days to complete the building
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Building")
+	uint8 DaysToComplete;
+	//How many workers that can work in the building
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Building")
+	uint8 MaxWorkerInBuilding;
+	//The resource this building produces
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Building")
+	ResourceTypes ResourceType;
+	//How many resources this building will add per worker
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Building")
+	uint8 ResourcePerWorker;
+	//How much the building costs to build
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Building")
+	FBuildingCost BuildingCost;
+};
 
 /**
  * 

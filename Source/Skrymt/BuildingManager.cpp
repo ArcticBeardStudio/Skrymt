@@ -1,6 +1,12 @@
 // Copyright 2017 Arctic Beard Studio. All Rights Reserved.
 
 #include "BuildingManager.h"
+#include "Building.h"
+
+bool UBuildingManager::StartConstruction(TSubclass<ABuilding> Class, FVector Location)
+{
+
+}
 
 void UBuildingManager::AddBuilding(ABuilding* building)
 {

@@ -2,12 +2,11 @@
 
 #pragma once
 
-#include "Building.h"
-
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "BuildingManager.generated.h"
 
+class ABuilding;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnConstructBuilding,ABuilding*,ConstructedBuilding);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDestroyBuilding);
@@ -21,6 +20,8 @@ class SKRYMT_API UBuildingManager : public UObject
 	GENERATED_BODY()
 	
 public:
+	UFUNCTION(BlueprintCallable, Category = "BuildingManager")
+	bool StartConstruction(FName Name, FVector Location);
 	
 	//When a building is being constructed, add it to the list of buildings
 	UFUNCTION(BlueprintCallable, Category = "BuildingManager")
@@ -37,6 +38,8 @@ public:
 	//Returns a list of all buildings that is currently constructing
 	UFUNCTION(BlueprintCallable, Category = "BuildingManager")
 	TArray<ABuilding*> GetBuildingsConstructing();
+
+	
 
 	//When a building is constructed, call the function to add it's resource to the resourcemanager
 	void Constructed();
