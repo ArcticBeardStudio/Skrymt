@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Building.h"
-#include "DayNightCycleGameState.h"
+#include "SkrymtGameState.h"
 #include "BuildingManager.h"
 #include "SkrymtPlayerState.h"
 
@@ -65,7 +65,7 @@ void ABuilding::SetVariables(uint8 NewHealth, uint8 NewArmor, uint8 NewHousing, 
 	ResourcePerWorker = NewResourcePerWorker;
 	BuildingCost = NewBuildingCost;
 	UE_LOG(LogTemp, Warning, TEXT("Set Variables Building"));
-	ADayNightCycleGameState* GameState = (ADayNightCycleGameState*)GetWorld()->GetGameState();
+	ASkrymtGameState* GameState = (ASkrymtGameState*)GetWorld()->GetGameState();
 	GameState->OnStartDay.AddDynamic(this, &ABuilding::StartedDay);
 	ASkrymtPlayerState* PlayerState = Cast<ASkrymtPlayerState>(GetWorld()->GetFirstPlayerController()->PlayerState);
 	BuildingManagerRef = PlayerState->BuildingManager;

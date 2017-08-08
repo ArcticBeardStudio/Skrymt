@@ -4,7 +4,7 @@
 
 #include "Engine.h"
 #include "GameFramework/GameStateBase.h"
-#include "DayNightCycleGameState.generated.h"
+#include "SkrymtGameState.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnStartDay);
 
@@ -12,12 +12,12 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnStartDay);
  * 
  */
 UCLASS()
-class SKRYMT_API ADayNightCycleGameState : public AGameStateBase
+class SKRYMT_API ASkrymtGameState : public AGameStateBase
 {
 	GENERATED_BODY()
 	
 public:
-	void DayNightCycleGameState();
+	void SkrymtGameState();
 
 	virtual void BeginPlay() override;
 
