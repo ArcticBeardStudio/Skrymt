@@ -58,10 +58,10 @@ EBTNodeResult::Type UBTTask_RandomLocationFromHome::ExecuteTask(class UBehaviorT
 		NavSys->GetRandomPointInNavigableRadius( Homelocation, AICon->GetWalkRadius(), NewLocation);
 		/*	Pawn->GetActorRotation()*/
 		//GEngine->AddOnScreenDebugMessage(30, 10.f, FColor::Blue, FString::Printf(TEXT("Days Worked = '%f'"), Radius));
-		FString TheFloatStr = FString::SanitizeFloat(Radius);
+		/*FString TheFloatStr = FString::SanitizeFloat(Radius);
 		FString TheFloatStrx = FString::SanitizeFloat(NewLocation.Location.X);
 		GEngine->AddOnScreenDebugMessage(-1, 1.0, FColor::Red, *TheFloatStr);
-		GEngine->AddOnScreenDebugMessage(-1, 1.0, FColor::Blue, *TheFloatStrx);
+		GEngine->AddOnScreenDebugMessage(-1, 1.0, FColor::Blue, *TheFloatStrx);*/
 		//UE_LOG(LogTemp, Warning, TEXT("Set Variables Building"));
 		//NavSys->GetRandomReachablePointInRadius(BlackboardComp->GetValueAsVector(Home), BlackboardComp->GetValueAsFloat(BBRadius) , NewLocation);
 
