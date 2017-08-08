@@ -6,6 +6,20 @@
 #include "UObject/NoExportTypes.h"
 #include "DataLibrary.generated.h"
 
+/*********
+* GLOBAL *
+*********/
+
+UENUM(BlueprintType)
+enum class EResourceTypes : uint8
+{
+	Food,
+	Wood,
+	Stone,
+	Ore,
+	Gold
+};
+
 /*****************
 * ABILITY SYSTEM *
 *****************/
@@ -98,31 +112,28 @@ struct FBuildingData : public FTableRowBase
 	
 	//Health Variable
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Building")
-	uint8 Health;
+	int32 Health;
 	//Armor Variable
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Building")
-	uint8 Armor;
+	int32 Armor;
 	//Housing Variable
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Building")
-	uint8 Housing;
+	int32 Housing;
 	//Garrison Variable
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Building")
-	uint8 Garrison;
-	//Number of days to complete the building
+	int32 Garrison;
+	//Number of days for complete the building
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Building")
-	uint8 DaysToComplete;
+	int32 ConstructionTime;
 	//How many workers that can work in the building
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Building")
-	uint8 MaxWorkerInBuilding;
-	//The resource this building produces
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Building")
-	ResourceTypes ResourceType;
+	int32 MaxWorkers;
 	//How many resources this building will add per worker
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Building")
-	uint8 ResourcePerWorker;
+	TMap<EResourceTypes, int32>  ResourcePerWorker;
 	//How much the building costs to build
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Building")
-	FBuildingCost BuildingCost;
+	TMap<EResourceTypes, int32> Cost;
 };
 
 /**

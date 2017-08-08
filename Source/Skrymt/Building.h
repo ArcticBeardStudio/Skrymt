@@ -9,11 +9,12 @@
 #include "Building.generated.h"
 
 
-UENUM()
-enum EBuildingStates
+UENUM(BlueprintType)
+enum EBuildingState
 {
 	Constructing,
 	Complete,
+	Broken
 };
 
 UCLASS()
@@ -26,7 +27,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
 	USceneComponent* Root;
 
-	EBuildingStates State;
+	// Holds the current state of the building
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Building")
+	EBuildingState State;
+
 
 protected:
 	// Called when the game starts or when spawned
@@ -38,8 +42,10 @@ public:
 	//constructor and initializer
 	ABuilding(const FObjectInitializer& ObjectInitializer);
 
-	// Called at the start of every day
-	UFUNCTION(BlueprintNativeEvent, Category = "Building")
 	void StartedDay();
+
+	// Called at the start of every day
+	UFUNCTION(BlueprintImplementableEvent, Category = "Building")
+	void NewDay();
 };
 

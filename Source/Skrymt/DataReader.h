@@ -9,9 +9,11 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "DataReader.generated.h"
 
-
+// Ability System
 #define ABILITY_PATH TEXT("/Game/Data/AbilityDataTable.AbilityDataTable")
 #define EFFECT_PATH TEXT("/Game/Data/EffectDataTable.EffectDataTable")
+// Building System
+#define BUILDING_PATH TEXT("/Game/Data/BuildingDataTable.BuildingDataTable")
 
 
 /**
@@ -24,6 +26,15 @@ class SKRYMT_API UDataReader : public UBlueprintFunctionLibrary
 
 
 public:
+	/************
+	* UTILITIES *
+	************/
+
+	
+
+	/***************
+	* DATA GETTERS *
+	***************/
 
 	// Base data getter function
 	static FTableRowBase* GetData(FName Name, const TCHAR* Path);
@@ -41,6 +52,14 @@ public:
 	{
 		return *static_cast<FEffectData*>(GetData(EffectName, EFFECT_PATH));
 	};
+
+	// Gets the data associated to the Effect with the given name
+	UFUNCTION(BlueprintCallable, Category = "Data Reader")
+	static FBuildingData GetBuildingData(FName BuildingName)
+	{
+		return *static_cast<FBuildingData*>(GetData(BuildingName, BUILDING_PATH));
+	};
+
 	// Gets the data associated to the Action with the given name
 	UFUNCTION(BlueprintCallable, Category = "DataReader")
 	static FActionData GetActionData(FName RowName);

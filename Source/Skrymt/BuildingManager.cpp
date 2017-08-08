@@ -3,9 +3,9 @@
 #include "BuildingManager.h"
 #include "Building.h"
 
-bool UBuildingManager::StartConstruction(TSubclass<ABuilding> Class, FVector Location)
+bool UBuildingManager::StartConstruction(FName Name, FVector Location)
 {
-
+	this->GetTypedOuter<ASkrymtPlayerState>()->SpawnActor()
 }
 
 void UBuildingManager::AddBuilding(ABuilding* building)

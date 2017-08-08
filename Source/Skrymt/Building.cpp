@@ -17,7 +17,7 @@ void ABuilding::BeginPlay()
 	Super::BeginPlay();
 }
 
-// Called at the start of every day
-void ABuilding::StartedDay_Implementation()
+void ABuilding::StartedDay()
 {
+
 }
