@@ -17,7 +17,7 @@ class SKRYMT_API ASkrymtGameState : public AGameStateBase
 	GENERATED_BODY()
 	
 public:
-	void SkrymtGameState();
+	ASkrymtGameState(const FObjectInitializer &ObjectInitializer);
 
 	virtual void BeginPlay() override;
 

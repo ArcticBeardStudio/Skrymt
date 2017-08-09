@@ -29,6 +29,7 @@ protected:
 
 
 public:
+	ASkrymtGameModeBase(const FObjectInitializer &ObjectInitializer);
 
 	virtual void Tick(float DeltaTime) override;
 
