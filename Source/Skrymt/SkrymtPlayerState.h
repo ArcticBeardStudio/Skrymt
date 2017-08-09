@@ -22,6 +22,8 @@ private:
 	FText TownName;// = LOCTEXT("TownName", "[TownName]");
 
 public:
+	ASkrymtPlayerState(const FObjectInitializer &ObjectInitializer);
+
 	//VARIABLES
 	//-----------------------------------------------------
 	UPROPERTY(BlueprintReadWrite)

@@ -1,17 +1,18 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "SkrymtGameState.h"
+#include "Core/SkrymtCore.h"
 #include "SkrymtPlayerState.h"
 #include "ResourceManager.h"
 
-void ASkrymtGameState::SkrymtGameState()
+ASkrymtGameState::ASkrymtGameState(const FObjectInitializer &ObjectInitializer)
+	:Super(ObjectInitializer)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Constructor game state"));
+	SkrymtCore::SetSkrymtGameState(this);
 }
 
 void ASkrymtGameState::BeginPlay()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Begin play game state"));
 	Super::BeginPlay();
 }
 
