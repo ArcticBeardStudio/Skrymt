@@ -1,12 +1,19 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "SkrymtPlayerState.h"
+#include "Core/SkrymtCore.h"
 #include "ProductionManager.h"
 #include "ResourceManager.h"
 #include "EventManager.h"
 #include "BuildingManager.h"
 #include "SkrymtGameInstance.h"
 #include "BuildingStructs.h"
+
+ASkrymtPlayerState::ASkrymtPlayerState(const FObjectInitializer &ObjectInitializer)
+	:Super(ObjectInitializer)
+{
+	SkrymtCore::SetSkrymtPlayerState(this);
+}
 
 void ASkrymtPlayerState::BeginPlay()
 {
