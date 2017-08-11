@@ -7,6 +7,7 @@
 #include "BuildingManager.generated.h"
 
 class ABuilding;
+enum class EResourceTypes : uint8;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnConstructBuilding,ABuilding*,ConstructedBuilding);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDestroyBuilding);
@@ -33,7 +34,7 @@ public:
 
 	//Returns a list of all buildings with the searched resourcetype
 	UFUNCTION(BlueprintCallable, Category = "BuildingManager")
-	TArray<ABuilding*> GetBuildingsOfType(ResourceTypes ResourceType);
+	TArray<ABuilding*> GetBuildingsOfType(EResourceTypes ResourceType);
 
 	//Returns a list of all buildings that is currently constructing
 	UFUNCTION(BlueprintCallable, Category = "BuildingManager")

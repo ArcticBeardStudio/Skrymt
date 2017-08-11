@@ -21,9 +21,11 @@ public:
 
 	virtual void BeginPlay() override;
 
-	UFUNCTION(BlueprintCallable, Category = "DayNightCycleStartDay")
-	void StartDay();
+	UPROPERTY(EditAnywhere, BlueprintAssignable, Category = "Skrymt Game State")
 	FOnStartDay OnStartDay;
+
+	UFUNCTION(BlueprintCallable, Category = "Skrymt Game State")
+	void StartDay();
 
 	UFUNCTION(BlueprintCallable, Category="DayNightCycleEndDay")
 	bool EndDay();

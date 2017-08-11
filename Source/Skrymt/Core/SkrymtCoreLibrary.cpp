@@ -17,3 +17,8 @@ ASkrymtGameState* USkrymtCoreLibrary::GetSkrymtGameState()
 {
 	return SkrymtCore::GetSkrymtGameState();
 }
+
+USkrymtGameInstance * USkrymtCoreLibrary::GetSkrymtGameInstance()
+{
+	return SkrymtCore::GetSkrymtGameInstance();
+}

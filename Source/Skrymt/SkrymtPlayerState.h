@@ -6,7 +6,10 @@
 #include "GameFramework/PlayerState.h"
 #include "SkrymtPlayerState.generated.h"
 
-#define LOCTEXT_NAMESPACE "Namespace"
+class ABuilding;
+struct FBuildingData;
+enum class EResourceTypes : uint8;
+enum class EGatherTypes : uint8;
 
 /**
  * 
@@ -26,26 +29,18 @@ public:
 
 	//VARIABLES
 	//-----------------------------------------------------
-	UPROPERTY(BlueprintReadWrite)
-	int iNumberOfCitizens = 100;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Skrymt Player State")
+	int32 Population;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Skrymt Player State")
+	int32 MaxPopulation;
 
-	UPROPERTY(BlueprintReadWrite)
-	int iNumberOfVacantCitizens = 50;
-
-	UPROPERTY(BlueprintReadWrite)
-	int iFoodResource = 50;
-
-	UPROPERTY(BlueprintReadWrite)
-	int iWoodResource = 50;
-
-	UPROPERTY(BlueprintReadWrite)
-	int iStoneResource = 50;
-
-	UPROPERTY(BlueprintReadWrite)
-	int iOreResource = 50;
-
-	UPROPERTY(BlueprintReadWrite)
-	int iGoldResource = 50;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Skrymt Player State")
+	TMap<EGatherTypes, int32> Workers;
+	TMap<EResourceTypes, TMap<EGatherTypes, int32>> Productions;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Skrymt Player State")
+	TMap<EResourceTypes, int32> Incomes;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Skrymt Player State")
+	TMap<EResourceTypes, int32> Resources;
 
 	UPROPERTY(BlueprintReadWrite)
 	TSet<FName> WeatherTags;
@@ -58,25 +53,17 @@ public:
 	//UFUNCTION(BlueprintCallable, Category = "GameManager")
 	TSet<FName> GetWeatherTags() { return WeatherTags; };
 
-	/** Function to update the number of citizens */
+	/** Function to change all resources*/
 	UFUNCTION(BlueprintCallable, Category = "Player State")
-	void UpdateNumberOfCitizens(int CitizenDifference) { iNumberOfCitizens = iNumberOfCitizens + CitizenDifference; };
-
-	/** Function to update the number of vacant citizens */
-	UFUNCTION(BlueprintCallable, Category = "Player State")
-	void UpdateNumberOfVacantCitizens(int VacantCitizenDifference) { iNumberOfVacantCitizens = iNumberOfVacantCitizens + VacantCitizenDifference; };
-
-	/** Function to change all resources */
-	UFUNCTION(BlueprintCallable, Category = "Player State")
-	void UpdateResources(TArray<int32> Resources);
+	void AddResources(TArray<int32> Values);
 
 	/** Function to change all resources when constructing building*/
 	UFUNCTION(BlueprintCallable, Category = "Player State")
-	void UpdateResourcesConstruct(FBuildingCost BuildingCost);
+	void UpdateResourcesConstruct(TArray<int32> BuildingCost);
 
 	/** Function to check if we have enough money to construct the building*/
 	UFUNCTION(BlueprintCallable, Category = "Player State")
-	bool CheckEnoughResources(FBuildingCost BuildingCost);
+	bool CheckEnoughResources(TArray<int32> BuildingCost);
 
 	/** Function to change all resources */
 	//UFUNCTION(BlueprintCallable, Category = "GameManager")
@@ -87,12 +74,6 @@ public:
 
 	//MEMBERS
 	//-----------------------------------------------------
-	UPROPERTY(BlueprintReadOnly)
-	class UProductionManager* ProductionManager;
-
-	UPROPERTY(BlueprintReadOnly)
-	class UResourceManager* ResourceManager;
-
 	UPROPERTY(BlueprintReadOnly)
 	class UEventManager* EventManager;
 
@@ -108,6 +89,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Player State")
 	FString GetTownName() { return TownName.ToString(); };
 
-
-#undef LOCTEXT_NAMESPACE 
+	UFUNCTION()
+	void BuildingConstructed(ABuilding* ConstructedBuilding);
 };

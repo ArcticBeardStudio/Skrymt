@@ -5,12 +5,12 @@
 //#include "CoreMinimal.h"
 #include "Engine.h"
 #include "GameFramework/Actor.h"
-#include "BuildingStructs.h"
 #include "Building.generated.h"
 
+struct FBuildingData;
 
 UENUM(BlueprintType)
-enum EBuildingState
+enum class EBuildingState : uint8
 {
 	Constructing,
 	Complete,
@@ -26,11 +26,21 @@ public:
 	// Root Component
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
 	USceneComponent* Root;
+	// Mesh Component
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building")
+	UStaticMeshComponent* Mesh;
+
+	// NAME
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Building")
+	FName BuildingName;
 
 	// Holds the current state of the building
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Building")
 	EBuildingState State;
 
+	// Holds the data associated with the building
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Building")
+	FBuildingData Data;
 
 protected:
 	// Called when the game starts or when spawned

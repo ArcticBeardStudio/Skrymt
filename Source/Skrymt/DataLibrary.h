@@ -20,6 +20,21 @@ enum class EResourceTypes : uint8
 	Gold
 };
 
+UENUM(BlueprintType)
+enum class EGatherTypes : uint8
+{
+	None,
+	Farming,
+	Gathering,
+	Hunting, 
+	Fishing,
+	Mining,
+	Quarrying,
+	Forestry
+};
+
+
+
 /*****************
 * ABILITY SYSTEM *
 *****************/
@@ -134,6 +149,9 @@ struct FBuildingData : public FTableRowBase
 	//How much the building costs to build
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Building")
 	TMap<EResourceTypes, int32> Cost;
+	//Gather type
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Building")
+	EGatherTypes GatherType;
 };
 
 /**

@@ -7,6 +7,7 @@
 class ASkrymtGameModeBase;
 class ASkrymtPlayerState;
 class ASkrymtGameState;
+class USkrymtGameInstance;
 
 /**
  * 
@@ -20,13 +21,16 @@ public:
 	static ASkrymtGameModeBase* GetSkrymtGameMode();
 	static ASkrymtPlayerState* GetSkrymtPlayerState();
 	static ASkrymtGameState* GetSkrymtGameState();
+	static USkrymtGameInstance* GetSkrymtGameInstance();
 
 	static void SetSkrymtGameMode(ASkrymtGameModeBase* NewGameMode);
 	static void SetSkrymtPlayerState(ASkrymtPlayerState* NewPlayerState);
 	static void SetSkrymtGameState(ASkrymtGameState* NewGameState);
+	static void SetSkrymtGameInstance(USkrymtGameInstance* NewGameInstance);
 
 protected:
 	static ASkrymtGameModeBase* SkrymtGameMode;
 	static ASkrymtPlayerState* SkrymtPlayerState;
 	static ASkrymtGameState* SkrymtGameState;
+	static USkrymtGameInstance* SkrymtGameInstance;
 };

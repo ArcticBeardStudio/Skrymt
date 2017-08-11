@@ -5,7 +5,7 @@
 
 bool UBuildingManager::StartConstruction(FName Name, FVector Location)
 {
-	this->GetTypedOuter<ASkrymtPlayerState>()->SpawnActor()
+	return false;
 }
 
 void UBuildingManager::AddBuilding(ABuilding* building)
@@ -21,29 +21,29 @@ void UBuildingManager::RemoveBuildingFromArray(ABuilding* building)
 	}
 }
 
-TArray<ABuilding*> UBuildingManager::GetBuildingsOfType(ResourceTypes ResourceType)
+TArray<ABuilding*> UBuildingManager::GetBuildingsOfType(EResourceTypes ResourceType)
 {
 	TArray<ABuilding*> NewList;
-	for (int i = 0; i < Buildings.Num(); i++)
+	/*for (int i = 0; i < Buildings.Num(); i++)
 	{
 		if (Buildings[i]->GetResourceType() == ResourceType)
 		{
 			NewList.Add(Buildings[i]);
 		}
-	}
+	}*/
 	return NewList;
 }
 
 TArray<ABuilding*> UBuildingManager::GetBuildingsConstructing()
 {
 	TArray<ABuilding*> NewList;
-	for (int i = 0; i < Buildings.Num(); i++)
+	/*for (int i = 0; i < Buildings.Num(); i++)
 	{
 		if (Buildings[i]->CheckComplete() == false)
 		{
 			NewList.Add(Buildings[i]);
 		}
-	}
+	}*/
 	return NewList;
 }
 

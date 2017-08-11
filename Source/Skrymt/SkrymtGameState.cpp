@@ -3,7 +3,6 @@
 #include "SkrymtGameState.h"
 #include "Core/SkrymtCore.h"
 #include "SkrymtPlayerState.h"
-#include "ResourceManager.h"
 
 ASkrymtGameState::ASkrymtGameState(const FObjectInitializer &ObjectInitializer)
 	:Super(ObjectInitializer)
@@ -19,8 +18,6 @@ void ASkrymtGameState::BeginPlay()
 //** Function called at the start of the day, updates the players resources
 void ASkrymtGameState::StartDay()
 {
-	ASkrymtPlayerState* PlayerState = Cast<ASkrymtPlayerState>(GetWorld()->GetFirstPlayerController()->PlayerState);
-	PlayerState->UpdateResources(PlayerState->ResourceManager->GetTodaysResources());
 	Day++;
 
 	OnStartDay.Broadcast();
@@ -29,8 +26,8 @@ void ASkrymtGameState::StartDay()
 //** Call this when "End day" button is pressed in the HUD. Determines whether we go to the next day or wave *//
 bool ASkrymtGameState::EndDay()
 {
-	ASkrymtPlayerState* PlayerState = Cast<ASkrymtPlayerState>(GetWorld()->GetFirstPlayerController()->PlayerState);
-	PlayerState->EndOfTheDay();
+	// TODO: Bind EndOfTheDay to PlayerState
+	SkrymtCore::GetSkrymtPlayerState()->EndOfTheDay();
 
 	return true;
 	/*if(bGoToNextDay)

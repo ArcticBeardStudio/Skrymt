@@ -15,6 +15,8 @@ class SKRYMT_API USkrymtGameInstance : public UGameInstance
 	GENERATED_BODY()
 	
 public:
+	USkrymtGameInstance(const FObjectInitializer & ObjectInitializer);
+
 	UFUNCTION(BlueprintPure, Category = "Skrymt Game Instance")
 	FText GetPlayerName(){ return PlayerName; }
 

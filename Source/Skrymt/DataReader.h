@@ -13,7 +13,7 @@
 #define ABILITY_PATH TEXT("/Game/Data/AbilityDataTable.AbilityDataTable")
 #define EFFECT_PATH TEXT("/Game/Data/EffectDataTable.EffectDataTable")
 // Building System
-#define BUILDING_PATH TEXT("/Game/Data/BuildingDataTable.BuildingDataTable")
+#define BUILDING_PATH TEXT("/Game/Data/BuildingStatsData.BuildingStatsData")
 
 
 /**
@@ -30,7 +30,7 @@ public:
 	* UTILITIES *
 	************/
 
-	
+
 
 	/***************
 	* DATA GETTERS *

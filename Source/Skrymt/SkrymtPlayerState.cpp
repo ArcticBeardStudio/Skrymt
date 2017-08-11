@@ -2,12 +2,11 @@
 
 #include "SkrymtPlayerState.h"
 #include "Core/SkrymtCore.h"
-#include "ProductionManager.h"
-#include "ResourceManager.h"
 #include "EventManager.h"
+#include "Building.h"
 #include "BuildingManager.h"
 #include "SkrymtGameInstance.h"
-#include "BuildingStructs.h"
+#include "DataLibrary.h"
 
 ASkrymtPlayerState::ASkrymtPlayerState(const FObjectInitializer &ObjectInitializer)
 	:Super(ObjectInitializer)
@@ -18,15 +17,13 @@ ASkrymtPlayerState::ASkrymtPlayerState(const FObjectInitializer &ObjectInitializ
 void ASkrymtPlayerState::BeginPlay()
 {
 	Super::BeginPlay();
-	ProductionManager = NewObject<UProductionManager>(this);
-	ResourceManager = NewObject<UResourceManager>(this);
 	EventManager = NewObject<UEventManager>(this);
 	BuildingManager = NewObject<UBuildingManager>(this);
 
-	BuildingManager->OnConstructBuilding.AddDynamic(ResourceManager, &UResourceManager::OnConstructedBuilding);
+	BuildingManager->OnConstructBuilding.AddDynamic(this, &ASkrymtPlayerState::BuildingConstructed);
 	EventManager->OnEventTriggered.AddDynamic(this, &ASkrymtPlayerState::EventTriggered);
 
-	USkrymtGameInstance* SGI = Cast<USkrymtGameInstance>(GetGameInstance());
+	USkrymtGameInstance* SGI = SkrymtCore::GetSkrymtGameInstance();
 	if (SGI)
 	{
 		PlayerName = SGI->GetPlayerName();
@@ -43,17 +40,6 @@ void ASkrymtPlayerState::BeginPlay()
 	
 }
 
-//Argument is a array where the indices are : { food, wood, stone, ore, gold }
-void ASkrymtPlayerState::UpdateResources(TArray<int32> Resources)
-{
-
-	iFoodResource = iFoodResource + Resources[0];
-	iWoodResource = iWoodResource + Resources[1];
-	iStoneResource = iStoneResource + Resources[2];
-	iOreResource = iOreResource + Resources[3];
-	iGoldResource = iGoldResource + Resources[4];
-}
-
 void ASkrymtPlayerState::UpdateWeather(TSet<FName> NewWeatherTags)
 {
 	WeatherTags.Empty();
@@ -62,26 +48,42 @@ void ASkrymtPlayerState::UpdateWeather(TSet<FName> NewWeatherTags)
 
 void ASkrymtPlayerState::EndOfTheDay()
 {
-	ProductionManager->SetTodaysProduction();
-	ResourceManager->CalculateTodaysResources(ProductionManager->GetTodaysProduction());
-	ResourceManager->SetTodaysResources();
-	UpdateResources(ResourceManager->GetTodaysResources());
 	UpdateWeather(EventManager->GetNextWeatherFromDecider());
 	EventManager->UpdateEvents();
 }
 
-void ASkrymtPlayerState::UpdateResourcesConstruct(FBuildingCost BuildingCost)
+void ASkrymtPlayerState::BuildingConstructed(ABuilding * ConstructedBuilding)
 {
-	iFoodResource -= BuildingCost.FoodCost;
-	iWoodResource -= BuildingCost.WoodCost;
-	iStoneResource -= BuildingCost.StoneCost;
-	iOreResource -= BuildingCost.OreCost;
-	iGoldResource -= BuildingCost.GoldCost;
+	FBuildingData BuildingData = ConstructedBuilding->Data;
+	for (auto& Elem : BuildingData.ResourcePerWorker)
+	{
+		TMap<EGatherTypes, int32>& GatherTypes = Productions.FindOrAdd(Elem.Key);
+		int32& Value = GatherTypes.FindOrAdd(BuildingData.GatherType);
+		Value += Elem.Value;
+		UE_LOG(LogTemp, Warning, TEXT("Added base current value: %d, %d, %d"), (int32)Elem.Key, (int32)BuildingData.GatherType, Value);
+	}
 }
 
-bool ASkrymtPlayerState::CheckEnoughResources(FBuildingCost BuildingCost)
+void ASkrymtPlayerState::AddResources(TArray<int32> Values)
 {
-	if (iFoodResource >= BuildingCost.FoodCost && iWoodResource >= BuildingCost.WoodCost && iStoneResource >= BuildingCost.StoneCost && iOreResource >= BuildingCost.OreCost && iGoldResource >= BuildingCost.GoldCost)
+	for (uint8 i = 0; i < Values.Num(); i++)
+	{
+		int32& Resource = Resources.FindOrAdd((EResourceTypes)i);
+		Resource += Values[(int32)i];
+	}
+}
+
+void ASkrymtPlayerState::UpdateResourcesConstruct(TArray<int32> BuildingCost)
+{
+	// TODO: Implement with current resource storage
+}
+
+bool ASkrymtPlayerState::CheckEnoughResources(TArray<int32> BuildingCost)
+{
+	// TODO: Implement with current resource storage
+
+
+	if (true)
 	{
 		return true;
 	}

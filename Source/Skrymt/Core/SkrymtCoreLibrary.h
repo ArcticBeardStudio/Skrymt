@@ -9,6 +9,7 @@
 class ASkrymtGameModeBase;
 class ASkrymtPlayerState;
 class ASkrymtGameState;
+class USkrymtGameInstance;
 
 /**
  * 
@@ -27,4 +28,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Skrymt")
 	static ASkrymtGameState* GetSkrymtGameState();
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Skrymt")
+	static USkrymtGameInstance* GetSkrymtGameInstance();
 };

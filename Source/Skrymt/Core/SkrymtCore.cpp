@@ -5,6 +5,7 @@
 ASkrymtGameModeBase* SkrymtCore::SkrymtGameMode;
 ASkrymtPlayerState* SkrymtCore::SkrymtPlayerState;
 ASkrymtGameState* SkrymtCore::SkrymtGameState;
+USkrymtGameInstance* SkrymtCore::SkrymtGameInstance;
 
 SkrymtCore::SkrymtCore()
 {
@@ -32,6 +33,12 @@ ASkrymtGameState* SkrymtCore::GetSkrymtGameState()
 	return SkrymtGameState;
 }
 
+USkrymtGameInstance * SkrymtCore::GetSkrymtGameInstance()
+{
+	check(SkrymtGameInstance != nullptr && "SkrymtGameInstance is null")
+	return SkrymtGameInstance;
+}
+
 void SkrymtCore::SetSkrymtGameMode(ASkrymtGameModeBase * NewGameMode)
 {
 	SkrymtGameMode = NewGameMode;
@@ -45,4 +52,9 @@ void SkrymtCore::SetSkrymtPlayerState(ASkrymtPlayerState * NewPlayerState)
 void SkrymtCore::SetSkrymtGameState(ASkrymtGameState * NewGameState)
 {
 	SkrymtGameState = NewGameState;
+}
+
+void SkrymtCore::SetSkrymtGameInstance(USkrymtGameInstance * NewGameInstance)
+{
+	SkrymtGameInstance = NewGameInstance;
 }
