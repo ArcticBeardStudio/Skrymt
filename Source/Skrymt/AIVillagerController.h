@@ -3,7 +3,8 @@
 #pragma once
 
 
-#include "AIController.h"
+//#include "AIController.h"
+#include "DetourCrowdAIController.h"
 #include "VillagerCharacter.h"
 #include "Perception/AIPerceptionComponent.h"
 #include "Perception/AISenseConfig_Sight.h"

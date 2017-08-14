@@ -54,7 +54,7 @@ EBTNodeResult::Type UBTTask_RandomLocationFromHome::ExecuteTask(class UBehaviorT
 		Homelocation = BlackboardComp->GetValueAsVector(Home); //Pawn->GetActorLocation();
 
 		UNavigationSystem* NavSys = UNavigationSystem::GetCurrent(Pawn);
-		//NavSys->GetRandomReachablePointInRadius(Homelocation, Radius, NewLocation);//   GetRandomReachablePointInRadius(Pawn->GetWorld(), Actorlocation, 2000.f);
+		//NavSys->GetRandomReachablePointInRadius(Homelocation, AICon->GetWalkRadius(), NewLocation);//   GetRandomReachablePointInRadius(Pawn->GetWorld(), Actorlocation, 2000.f);
 		NavSys->GetRandomPointInNavigableRadius( Homelocation, AICon->GetWalkRadius(), NewLocation);
 		/*	Pawn->GetActorRotation()*/
 		//GEngine->AddOnScreenDebugMessage(30, 10.f, FColor::Blue, FString::Printf(TEXT("Days Worked = '%f'"), Radius));
